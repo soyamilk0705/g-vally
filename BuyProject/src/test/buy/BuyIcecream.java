@@ -1,6 +1,6 @@
 package test.buy;
 /**
- * 
+ * <pre>
  * <아이스크림 심부름>
 출연진: 나, 로봇, 편의점(점원)
 데이터: 1000원, "누가바"
@@ -26,7 +26,7 @@ package test.buy;
 9-1. syso(right);
 
  * @author 김희수
- *
+ *</pre>
  */
 public class BuyIcecream {
 
@@ -44,6 +44,11 @@ public class BuyIcecream {
 		System.out.println(right);
 	}
 	
+	/**
+	 * 아이스크림 사오는 함수
+	 * @param left : 돈
+	 * @return : 사온 아이스크림<String>타입
+	 */
 	private static Object buyIcecream(int left) {
 			//	4. 로봇이 편의점(cu)를 발견하고 들어간다.
 			CU cu = new CU();
