@@ -13,4 +13,9 @@ public class CU {
 		//	7. (5번에 대한 응답으로) (점원이 로봇에게) 아이스크림(누가바)를 준다.
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "우리집 앞 CU [ getIcecream() 함수를 가지고 있음 ]";
+	}
 }
