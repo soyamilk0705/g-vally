@@ -53,7 +53,7 @@ public class TestCalc {
 		// 사용자 출력
 //		byte[] buffer = new byte[2]; // int: 4byte (16억) vs byte[4] : 4글자(기호, 숫자
 //		int inputData = System.in.read(buffer);	// inputData : byte 
-//		String temp = new String(buffer);
+//		String temp = new String(buffer);		// byte -> String으로 변경
 //		opr1 = new Integer(temp);
 //		System.out.println((char)inputData);
 		
