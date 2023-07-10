@@ -69,6 +69,50 @@ public class TestCollection2 {
 		System.out.println("set 전체 출력 ");
 		
 		print(set);
+//		for(Object object: c) {
+//		// 배열일 경우
+//		if (object instanceof int[]) {		// instanceof : object 객체의 타입이 int[]인지 체크해줌, java에만 있는 논리 연산자 : RuntimeType(new 또는 생성한 타입) checking 용
+//
+//			for (int j : i) {
+//				System.out.print(j + ", ");
+//			}
+//			// 과제 1 : 마지막 데이터 뒤에 [,] 제거하기
+//			System.out.println();	
+//		} else {
+//			// 일반 데이터의 경우
+//			System.out.println(object);
+//		}
+//	}
+		
+		String printJ = "";
+		
+		// 과제 1 : 마지막 데이터 뒤에 [,] 제거하기
+		// 과제 2 : void print (Collection c) -> print(list); print(set);
+		
+		// 1. 출력을 나중에 하고, printJ변수에 j 값을 담고("0, 1, 2, 3, 4 ") -> "0, 1, 2, 3, 4" 변환 (문자열의 일부를 선택하는 함수)
+		for(int j : i) {
+			printJ += (j + ", ");
+		}
+		printJ = printJ.substring(0, 13);
+		System.out.println(printJ);
+		
+ 		// 2. for문장의 print()는 같은 줄에서 출력하는 것이므로 마지막에 \b를 사용해서 앞의 문자 2개를 지운다.
+		for(int j : i) {
+			printJ += (j + ", ");
+		}
+		System.out.println("int[] : " + printJ + "\b\b\b\b");
+		
+		// 3. i의 size()를 체크해서 마지막번재일 경우 + ", "를 안함
+		int count = 1;
+		
+		for(int j : i) {
+			if (count++ == i.length) {		// count : 1 ~ size()
+				System.out.print(j);
+				break;
+			}
+			System.out.print(j + ", ");
+		}
+		System.out.println();
 		
 		// set -> list로 다시 바꿈
 		list = new ArrayList<>(set);
@@ -83,41 +127,23 @@ public class TestCollection2 {
 		System.out.println("배열 출력");
 		for (Object object : array) {System.out.println(object);}
 		
-		
-		
-		
 	}
 	
 	
 	public static void print(Collection c) {
-//		for(Object object: c) {
-//			// 배열일 경우
-//			if (object instanceof int[]) {		// instanceof : object 객체의 타입이 int[]인지 체크해줌, java에만 있는 논리 연산자 : RuntimeType(new 또는 생성한 타입) checking 용
-//	
-//				for (int j : i) {
-//					System.out.print(j + ", ");
-//				}
-//				// 과제 1 : 마지막 데이터 뒤에 [,] 제거하기
-//				System.out.println();	
-//			} else {
-//				// 일반 데이터의 경우
-//				System.out.println(object);
-//			}
-//		}
-		
-
-		// 과제2 : void print (Collection c) -> print(list); print(set);
 		for(Object object: c) {
 			// 배열일 경우
 			if (object instanceof int[]) {		// instanceof : object 객체의 타입이 int[]인지 체크해줌, java에만 있는 논리 연산자 : RuntimeType(new 또는 생성한 타입) checking 용
-				String result = "";
+				String printJ = "";
+				
+				
 				int[] array = (int[]) object;
 				
 				for (int j : array) {
-					result += j + ", ";
+					printJ += j + ", ";
 				}
 				
-				System.out.println(result.substring(0, result.length() - 2));
+				System.out.println(printJ.substring(0, printJ.length() - 2));
 
 			} else {
 				// 일반 데이터의 경우

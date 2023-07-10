@@ -19,8 +19,7 @@ public class TestCollection {
 		for(int j = 0; j < i.length; j++) {
 			i[j] = j;
 		}
-		
-
+	
 		System.out.println(i[4]);
 		
 		// for-each

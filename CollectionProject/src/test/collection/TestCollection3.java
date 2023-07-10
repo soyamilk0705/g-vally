@@ -86,7 +86,6 @@ public class TestCollection3 {
 //				for (int j : i) {
 //					System.out.print(j + ", ");
 //				}
-//				// 과제 1 : 마지막 데이터 뒤에 [,] 제거하기
 //				System.out.println();	
 //			} else {
 //				// 일반 데이터의 경우
@@ -94,19 +93,19 @@ public class TestCollection3 {
 //			}
 //		}
 		
-
-		// 과제2 : void print (Collection c) -> print(list); print(set);
+		
 		for(Object object: c) {
 			// 배열일 경우
 			if (object instanceof int[]) {		// instanceof : object 객체의 타입이 int[]인지 체크해줌, java에만 있는 논리 연산자 : RuntimeType(new 또는 생성한 타입) checking 용
-				String result = "";
+				String printJ = "";
+				
 				int[] array = (int[]) object;
 				
 				for (int j : array) {
-					result += j + ", ";
+					printJ += j + ", ";
 				}
 				
-				System.out.println(result.substring(0, result.length() - 2));
+				System.out.println(printJ.substring(0, printJ.length() - 2));
 
 			} else {
 				// 일반 데이터의 경우
