@@ -51,7 +51,7 @@ public class TestEmployee {
 		String name = in.nextLine();
 //		
 //		// 2. name으로 직원 정보를 찾아오는 함수 : select()
-//		emp = select(stmt, name);
+//		emp = selectByName(stmt, name);
 //		System.out.println(emp);
 		
 		// 직원 추가(신입, 경력 직원 입사) : insert()
@@ -60,13 +60,13 @@ public class TestEmployee {
 		
 		// TODO
 		// 과제1. 직원정보를 삭제 함수 : delete()
-//		emp = select(stmt, name);
+//		emp = selectByName(stmt, name);
 //		System.out.println(emp);
-//		result = delete(stmt, emp.getId());
+//		result = delete1(stmt, emp.getId());
 //		System.out.println(result);
 		
 		// 과제2. 직원정보를 변경 함수 : update()
-		emp = select(stmt, name);		// 검증하기 위해서 한번 더 사용
+		emp = selectByName(stmt, name);		// 검증하기 위해서 한번 더 사용
 		System.out.println(emp);
 		result = update(stmt, in, emp.getId());
 		System.out.println(result);
@@ -108,13 +108,13 @@ public class TestEmployee {
 		System.out.println("직원 이메일을 입력하세요>");
 		email = in.nextLine();
 		
-		String sql = "INSERT INTO EmpTBL (seq, id, pwd, name, phone, email, hireDT)\n"
-				+ " VALUES (seq_EmpTBL.NEXTVAL, '"+ id +"', '"+ pwd +"', '"+ name +"', '"+ phone +"', '"+ email + "', SYSDATE)";
+		String sql = "insert into EmpTBL (seq, id, pwd, name, phone, email, hireDT)\n"
+				+ " values (seq_EmpTBL.NEXTVAL, '"+ id +"', '"+ pwd +"', '"+ name +"', '"+ phone +"', '"+ email + "', sysdate)";
 		int result  = stmt.executeUpdate(sql);	// insert, delete, update 실행 시 사용
 		Employee emp;
 		
 		if (result == 1) {	// 성공
-			emp = select(stmt, name);
+			emp = selectByName(stmt, name);
 			if (emp.getId().equals(id)) {
 				returnResult = "직원정보가 정상적으로 입력되었습니다.";
 			} else {
@@ -127,7 +127,7 @@ public class TestEmployee {
 		return returnResult;
 	}
 	
-	private static Employee select (Statement stmt, String name) throws SQLException {
+	private static Employee selectByName (Statement stmt, String name) throws SQLException {
 		Employee emp;
 		String sql = "select * from EmpTBL where name ='" + name + "'";
 		ResultSet result  = stmt.executeQuery(sql);
@@ -150,15 +150,57 @@ public class TestEmployee {
 		return emp;
 	}
 	
-	private static String delete(Statement stmt, String id) throws SQLException {
+	
+	private static Employee selectById (Statement stmt, String id) throws SQLException {
+		Employee emp;
+		String sql = "select * from EmpTBL where id ='" + id + "'";
+		ResultSet result  = stmt.executeQuery(sql);
+		
+		if (result.next()) {
+			emp = new Employee(result.getString("id"), result.getString("pwd"), result.getString("name"), result.getString("phone"), result.getString("email"), result.getString("hireDT"));
+		} else {
+			emp = null;
+		}
+		
+		result.close();
+		return emp;
+	}
+	
+	private static String delete1(Statement stmt, String id) throws SQLException {
+		Employee emp;
 		String returnResult;
+		
+		emp = selectById(stmt, id);
+		if (emp == null){
+			returnResult = "ID : " + id + "의 직원정보가 이미 삭제되었습니다.\n";
+			return returnResult;
+		}
+		
 		String sql = "delete from EmpTBL where id = '" + id + "'";
 		int result = stmt.executeUpdate(sql);
 		
 		if (result == 1) {
-			returnResult = "직원이 삭제되었습니다.";
+			returnResult = "직원정보가 정상적으로 삭제되었습니다.";
 		} else {
-			returnResult = "직원 삭제에 실패했습니다.";
+			returnResult = "직원정보가 삭제되지 않았습니다. \nid를 다시 입력해주세요.";
+		}
+		
+		return returnResult;
+	}
+	
+	// 삭제 후 체킹 하기 때문에 좋은 코드 아님
+	private static String delete2(Statement stmt, String id) throws SQLException {
+		Employee emp;
+		String returnResult;
+		
+		String sql = "delete from EmpTBL where id = '" + id + "'";
+		int result = stmt.executeUpdate(sql);
+		
+		emp = selectById(stmt, id);
+		if (emp == null){
+			returnResult = "ID : " + id + "의 직원정보" + result + "개가 삭제되었습니다.";
+		}  else {
+			returnResult = "직원정보가 삭제되지 않았습니다. \nId : " + id + "를 다시 입력해주세요.";
 		}
 		
 		return returnResult;
@@ -179,13 +221,13 @@ public class TestEmployee {
 		System.out.println("변경할 직원 이메일을 입력하세요>");
 		email = in.nextLine();
 		
-		String sql = "UPDATE EmpTBL\n"
-				+ " SET id = '" + newId + "' , pwd = '" + pwd + "', name = '" + name + "', phone = '" + phone + "', email = '" + email + "'\n"
-				+ " WHERE id = '" + id + "'";
+		String sql = "update EmpTBL\n"
+				+ " set id = '" + newId + "' , pwd = '" + pwd + "', name = '" + name + "', phone = '" + phone + "', email = '" + email + "'\n"
+				+ " where id = '" + id + "'";
 		int result = stmt.executeUpdate(sql);
 		
 		if (result == 1) {
-			emp = select(stmt, name);
+			emp = selectByName(stmt, name);
 			if (emp.getId().equals(newId)) {
 				returnResult = "직원 정보가 수정되었습니다.";
 			} else {
