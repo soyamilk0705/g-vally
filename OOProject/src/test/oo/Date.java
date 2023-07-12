@@ -1,5 +1,7 @@
 package test.oo;
 
+import java.util.Arrays;
+
 public class Date {
 	private int year;
 	private int month;	// 1 ~ 12
@@ -33,7 +35,53 @@ public class Date {
 //		return getYear() + "." + month + "." + day + ".";
 	}
 	
+	@Override
+	public int hashCode() {			// 데이터들이 같으면 값이 같아짐
+		final int prime = 31;						
+		int result = 1;
+		result = prime * result + day;
+		result = prime * result + Arrays.hashCode(lastDayOfMonth);
+		result = prime * result + month;
+		result = prime * result + year;		
+		return result;
+	}
+
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)				// o1 = o2 인 경우 (o2 에 o1 포함된 경우)
+			return true;
+		if (obj == null)				// equals 함수가 존재할려면 객채가 존재해야하니까 null 안됨
+			return false;
+		if (getClass() != obj.getClass())		//  class 이름이 다르면
+			return false;
+		Date other = (Date) obj;		// 이 밑으론 실제 데이터 값이 같은지 비교
+		if (day != other.day)				
+			return false;
+		if (!Arrays.equals(lastDayOfMonth, other.lastDayOfMonth))
+			return false;
+		if (month != other.month)
+			return false;
+		if (year != other.year)
+			return false;
+		return true;
+	}
+	
+	
+	public boolean myEquals(Object obj) {
+		Date other = (Date) obj;
+		
+		if ((this != obj) && (obj == null) || (getClass() != obj.getClass())
+				|| (day != other.day) || !Arrays.equals(lastDayOfMonth, other.lastDayOfMonth) 
+				|| (month != other.month) || (year != other.year) || (hashCode() != obj.hashCode())) {
+			return false;
+		}
+		return true;
+	}
+	
+
+	
+
 	/**
 	 * @return the year
 	 */
