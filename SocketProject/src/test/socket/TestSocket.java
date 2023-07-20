@@ -8,17 +8,17 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 /**
- * TCP/IP Socketí”„ë¡œê·¸ë¨
+ * TCP/IP SocketÇÁ·Î±×·¥
  * Client : 
- * 1. Socket ë§Œë“¤ê¸°
- * 2. 1ë²ˆ.getOutputStream()
- * 3. 1ë²ˆ.getInputStream()
- * 4. request ë°ì´í„°ë¥¼ ë§Œë“¤ê¸°
- * 5. 2ë²ˆ.write()ë¥¼ í†µí•´ 4ë²ˆ ë°ì´í„° ì „ì†¡
- * 6. 3ë²ˆ.read()ë¥¼ í†µí•´ resultë°ì´í„°ë¥¼ ë°›ê¸°
- * 7. 5ë²ˆ ~ 6ë²ˆ ë°˜ë³µ
- * 8. 2,3ë²ˆì„ ë‹«ëŠ”ë‹¤.
- * 9. 1ë²ˆì„ ë‹«ëŠ”ë‹¤.
+ * 1. Socket ¸¸µé±â
+ * 2. 1¹ø.getOutputStream()
+ * 3. 1¹ø.getInputStream()
+ * 4. request µ¥ÀÌÅÍ¸¦ ¸¸µé±â
+ * 5. 2¹ø.write()¸¦ ÅëÇØ 4¹ø µ¥ÀÌÅÍ Àü¼Û
+ * 6. 3¹ø.read()¸¦ ÅëÇØ resultµ¥ÀÌÅÍ¸¦ ¹Ş±â
+ * 7. 5¹ø ~ 6¹ø ¹İº¹
+ * 8. 2,3¹øÀ» ´İ´Â´Ù.
+ * 9. 1¹øÀ» ´İ´Â´Ù.
  * 
  * @author Anyware
  *
@@ -26,27 +26,27 @@ import java.util.Scanner;
 public class TestSocket {
 
 	public static void main(String[] args) throws UnknownHostException, IOException {
-		//1. Socket ë§Œë“¤ê¸°
+		//1. Socket ¸¸µé±â
 		String ip = "192.168.1.83"; //localhost
 		int port = 5000;
 //		ip = "www.naver.com"; port = 80;
 		Socket client = new Socket(ip, port);
-		 //2. 1ë²ˆ.getOutputStream()
-		 //3. 1ë²ˆ.getInputStream()
+		//2. 1¹ø.getOutputStream()
+		//3. 1¹ø.getInputStream()
 		OutputStream out = client.getOutputStream();
 		InputStream in = client.getInputStream();
-		 //4. request ë°ì´í„°ë¥¼ ë§Œë“¤ê¸°
+		//4. request µ¥ÀÌÅÍ¸¦ ¸¸µé±â
 		String request = "23";
 		Scanner inClient = new Scanner(System.in);
-		 //5. 2ë²ˆ.write()ë¥¼ í†µí•´ 4ë²ˆ ë°ì´í„° ì „ì†¡.
-		 //6. 3ë²ˆ.read()ë¥¼ í†µí•´ resultë°ì´í„°ë¥¼ ë°›ê¸°
+		//5. 2¹ø.write()¸¦ ÅëÇØ 4¹ø µ¥ÀÌÅÍ Àü¼Û.
+		//6. 3¹ø.read()¸¦ ÅëÇØ resultµ¥ÀÌÅÍ¸¦ ¹Ş±â
 		while (true) {
-			System.out.print("ëŒ€í™”ì…ë ¥>");
+			System.out.print("´ëÈ­ÀÔ·Â>");
 			request = inClient.next();
 			out.write(request.getBytes());
 			byte[] buffer = new byte[1024];
 			try {
-				in.read(buffer );
+				in.read(buffer);
 				System.out.println(new String(buffer));
 				if(request.trim().equals("1")) break;
 			} catch (Exception e) {
@@ -54,11 +54,11 @@ public class TestSocket {
 				break;
 			}
 		}
-		 // 7. 5ë²ˆ ~ 6ë²ˆ ë°˜ë³µ
-		 //8. 2,3ë²ˆì„ ë‹«ëŠ”ë‹¤.
+		// 7. 5¹ø ~ 6¹ø ¹İº¹
+		//8. 2,3¹øÀ» ´İ´Â´Ù.	
 		in.close();
 		out.close();
-		 //9. 1ë²ˆì„ ë‹«ëŠ”ë‹¤.
+		//9. 1¹øÀ» ´İ´Â´Ù.
 		 client.close();
 		 
 	}

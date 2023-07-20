@@ -11,18 +11,18 @@ import java.util.ArrayList;
 
 /**
  * Socket Server Application
- * 1. ServerSocketì„ ë§Œë“ ë‹¤.(port)
- * 2. 1ë²ˆ.accept(); //ì„œë²„ ê°€ë™...
- * 3. 2ë²ˆì€ Socketì„ return typeìœ¼ë¡œ...
- * 4. 3ë²ˆ.getInputStream()
- * 5. 3ë²ˆ.getOutputStream()
- * 6. 4ë²ˆ.read()ë¥¼ í†µí•´ requestë°ì´í„°ë¥¼ ë°›ê¸°
- * 7. response ë°ì´í„°ë¥¼ ë§Œë“¤ê¸°
- * 8. 5ë²ˆ.write()ë¥¼ í†µí•´ 7ë²ˆ ë°ì´í„° ì „ì†¡
- * 9. 6ë²ˆ ~ 8ë²ˆ ë°˜ë³µ
- * 10. 4,5ë²ˆì„ ë‹«ëŠ”ë‹¤.
- * 11. 3ë²ˆì„ ë‹«ëŠ”ë‹¤.
- * 12. 1ë²ˆì„ ë‹«ëŠ”ë‹¤.
+ * 1. ServerSocketÀ» ¸¸µç´Ù.(port)
+ * 2. 1¹ø.accept(); //¼­¹ö °¡µ¿...
+ * 3. 2¹øÀº SocketÀ» return typeÀ¸·Î...
+ * 4. 3¹ø.getInputStream()
+ * 5. 3¹ø.getOutputStream()
+ * 6. 4¹ø.read()¸¦ ÅëÇØ requestµ¥ÀÌÅÍ¸¦ ¹Ş±â
+ * 7. response µ¥ÀÌÅÍ¸¦ ¸¸µé±â
+ * 8. 5¹ø.write()¸¦ ÅëÇØ 7¹ø µ¥ÀÌÅÍ Àü¼Û
+ * 9. 6¹ø ~ 8¹ø ¹İº¹
+ * 10. 4,5¹øÀ» ´İ´Â´Ù.
+ * 11. 3¹øÀ» ´İ´Â´Ù.
+ * 12. 1¹øÀ» ´İ´Â´Ù.
  * 
  * @author Anyware
  *
@@ -32,7 +32,7 @@ public class TestServerSocket {
 	static int port = 5000;
 	public static ServerSocket server; 
 	public static void main(String[] args) throws IOException {
-		//1. ServerSocketì„ ë§Œë“ ë‹¤.(port)
+		//1. ServerSocketÀ» ¸¸µç´Ù.(port)
 
 		InputStream in;
 		Socket service;
@@ -42,27 +42,27 @@ public class TestServerSocket {
 		ArrayList<InputStream> inList = new ArrayList();
 		ArrayList<OutputStream> outList = new ArrayList(); //* <E, K, V, T,...> : Generic type
 		server = new ServerSocket(port ); 
-		System.out.println("ì„œë²„ ê°€ë™ ì™„ë£Œ : " + port);
+		System.out.println("¼­¹ö °¡µ¿ ¿Ï·á : " + port);
 
-		while (isAlived) {		
+		while (isAlived) {		// port·Î service ¿äÃ»À» ¹Ş±â À§ÇØ¼­ ¹«ÇÑ·çÇÁ µ¹À½
 			service = server.accept(); 
 			ServiceThread thread = new ServiceThread(service, clientList, inList, outList);
 			thread.start();
 			threadList.add(thread);
 		}
-		 // 9. 6ë²ˆ ~ 8ë²ˆ ë°˜ë³µ
-		 //10. 4,5ë²ˆì„ ë‹«ëŠ”ë‹¤.
+		// 9. 6¹ø ~ 8¹ø ¹İº¹
+		//10. 4,5¹øÀ» ´İ´Â´Ù.
 		for (InputStream inClient : inList) {
 			inClient.close();
 		}
 		for (OutputStream outClient : outList) {
 			outClient.close();
 		}
-		 //11. 3ë²ˆì„ ë‹«ëŠ”ë‹¤.
+		//11. 3¹øÀ» ´İ´Â´Ù.
 		for (Socket client : clientList) {
 			client.close();
 		}
-		//12. 1ë²ˆì„ ë‹«ëŠ”ë‹¤.
+		//12. 1¹øÀ» ´İ´Â´Ù.
 		 server.close();
 		System.out.println("Server shutdown!");
 	}

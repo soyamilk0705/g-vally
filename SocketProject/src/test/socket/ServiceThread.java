@@ -20,10 +20,10 @@ public class ServiceThread extends Thread {
 	public void run()
 	{
 		
-		SocketAddress remote = service.getRemoteSocketAddress();
+		SocketAddress remote = service.getRemoteSocketAddress();	// ip ÁÖ¼Ò ³ª¿È
 		System.out.println("client connected...[" + remote + "]");
-		//4. 3ë²ˆ.getInputStream()
-		//5. 3ë²ˆ.getOutputStream()
+		//4. 3¹ø.getInputStream()
+		//5. 3¹ø.getOutputStream()
 		try {
 			in = service.getInputStream();
 			out = service.getOutputStream();
@@ -36,29 +36,29 @@ public class ServiceThread extends Thread {
 		}
 		
 		String request=" ";
-		while(!request.trim().equals("1")) {
-			//6. 4ë²ˆ.read()ë¥¼ í†µí•´ requestë°ì´í„°ë¥¼ ë°›ê¸°
+		while(!request.trim().equals("1")) {	// trim : °ø¹éÁ¦°Å
+			//6. 4¹ø.read()¸¦ ÅëÇØ requestµ¥ÀÌÅÍ¸¦ ¹Ş±â
 			byte[] buffer = new byte[1024];
 			try {
 				in.read(buffer);
 				request = new String(buffer);
 				System.out.println(remote+">" + new String(buffer).trim());
-				//7. response ë°ì´í„°ë¥¼ ë§Œë“¤ê¸°
+				//7. response µ¥ÀÌÅÍ¸¦ ¸¸µé±â
 				String response = request;
-				 //8. 5ë²ˆ.write()ë¥¼ í†µí•´ 7ë²ˆ ë°ì´í„° ì „ì†¡
+				//8. 5¹ø.write()¸¦ ÅëÇØ 7¹ø µ¥ÀÌÅÍ Àü¼Û
 
 				for (OutputStream o : outList) {
-					o.write(response.getBytes());
+					o.write(response.getBytes());		// writeÇÏ´Ù°¡ exception ¹ß»ıÇÏ¸é this ½º·¹µå Á×À½ -> catch·Î Àâ±â ¶§¹®¿¡ ½º·¹µå ¾ÈÁ×À½
 					o.flush();
 				}
-			} catch (IOException e) {
+			} catch (IOException e) {		// Á»ºñ ½º·¹µå ¸¸µé¾îÁö´Â°Å ¹æÁö, °©ÀÛ½º·´°Ô ¿¬°áÀÌ ²÷±â¸é Á»ºñ ½º·¹µå »ı±è(ÀçÁ¢¼ÓÇØµµ Æ÷Æ® ´Ù¸£±â ¶§¹®¿¡ ´Ù¸¥ Å¬¶óÀÌ¾ğÆ®·Î ÀÎ½Ä)
 				// TODO Auto-generated catch block
 //				e.printStackTrace();
 				outList.remove(out);
 				break;
 			}
 		}
-		inList.remove(in);
+		inList.remove(in);		// ³»°¡ ¼ÓÇØ ÀÖ´Â list¿¡¼­ ºüÁ®³ª¿È
 		outList.remove(out);
 		clientList.remove(service);
 		try {
