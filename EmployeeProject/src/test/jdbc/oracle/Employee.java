@@ -1,4 +1,4 @@
-package test.employee;
+package test.jdbc.oracle;
 
 public class Employee {
 	private String id;
