@@ -166,6 +166,13 @@ public class TestEmployee {
 		return emp;
 	}
 	
+	/**
+	 * 삭제할 직원정보를 사전에 체크하는 경우
+	 * @param stmt
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	private static String delete1(Statement stmt, String id) throws SQLException {
 		Employee emp;
 		String returnResult;
@@ -188,7 +195,15 @@ public class TestEmployee {
 		return returnResult;
 	}
 	
-	// 삭제 후 체킹 하기 때문에 좋은 코드 아님
+	
+	/**
+	 * 직원 정보를 삭제한 뒤 정상적으로 삭제되었는지를 확인한다.
+	 * (삭제 후 체킹 하기 때문에 좋은 코드 아님)
+	 * @param stmt
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	private static String delete2(Statement stmt, String id) throws SQLException {
 		Employee emp;
 		String returnResult;
