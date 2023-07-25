@@ -28,13 +28,18 @@ public class TestEmp {
 		Connection conn = DriverManager.getConnection(url, user, password);
 								
 		// 3. 명령문 생성하기
-		Statement stmt = conn.createStatement();
+		Statement stmt = conn.createStatement();		// DBMS - session 생성 (statement 단위로 만들어짐) 
+																			// 명령어 하나 당 결과물(ResultSet) 하나밖에 못만들어짐 (stmt:result = 1:1)
 
 		// 4. 명령문 실행하기
 		ArrayList<Employee> listEmp = new ArrayList<Employee>();
 		Employee emp;
 		String result;
 
+		// selectAll()
+		listEmp = selectAll(stmt, listEmp);
+		System.out.println(listEmp);
+		
 		// select()
 		Scanner in = new Scanner(System.in);
 		System.out.println("검색할 직원 이름을 입력하세요>");
@@ -43,15 +48,15 @@ public class TestEmp {
 		System.out.println(emp);
 		
 		// insert()
-		result = insert(stmt, in);
+		result = insert(stmt, in);	// view를 처리에 붙여서 넘기는 방식이기 때문에 사용자 입력 받고 데이터 자체를 넘겨주는게 좋음, 위에 방식이더 좋음(view-control-storage 따로 하는게 좋음)
 		System.out.println(result);
 		
 		// delete()
 		System.out.println("삭제할 직원의 이름을 입력하세요>");
 		name = in.nextLine();
-		emp = selectByName(stmt, name);
+		emp = selectByName(stmt, name);			// selectByName은 delete 하기 위한 전처리로 쓰임(알고있는 정보로 원하는 정보를 찾음)
 		System.out.println(emp);
-		result = delete(stmt, emp.getId());
+		result = delete(stmt, emp.getId());		
 		System.out.println(result);
 		
 		// update()
@@ -62,9 +67,7 @@ public class TestEmp {
 		result = update(stmt, in, emp.getId());
 		System.out.println(result);
 		
-		// selectAll()
-		listEmp = selectAll(stmt, listEmp);
-		System.out.println(listEmp);
+		
 		
 		stmt.close();
 		conn.close();
@@ -193,24 +196,36 @@ public class TestEmp {
 	}
 	
 	private static String delete(Statement stmt, String id) throws SQLException {
+		Connection conn = stmt.getConnection(); // 새로 연결하는 것이 아니라 stmt에서 자기를 만든 conn을 찾아오는 것
+		conn.setAutoCommit(false);
+		
 		Employee emp;
 		String returnResult;
-		
-		emp = selectById(stmt, id);
-		if (emp == null) {
-			returnResult = "이미 삭제된 직원입니다.";
-			return returnResult;
-		}
 		
 		String sql = "delete from EmpTBL where id = '" + id + "'";
 		int result = stmt.executeUpdate(sql);
 		
-		if(result == 1) {
-			returnResult = "직원 정보가 삭제되었습니다.";
-		} else {
-			returnResult = "직원 정보 삭제에 실패했습니다. 다시 입력해주세요";
+		// 밑에 else 두개 중복된 거 뺄 수 있음(selectById 밖으로 빼면 됨)
+		if(result == 1) {			// switch 문으로도 작성가능 (가독성 좋음), if 문으로 작성하면 성능이 좋음(보통 0이나 1로 result 가 많이 나오니까) 
+			emp = selectById(stmt, id);		// 진짜 삭제되었는지 검증
+			
+			if (emp == null) {
+				returnResult = "ID : " + id + "의 직원정보 " + result + "개가 삭제되었습니다.";
+				conn.commit();
+			} else {	// 삭제된 직원정보와 같은 아이디가 존재하는 경우
+				returnResult = "직원정보가 삭제되지 않았습니다.\nID : " + id + "가 중복되었습니다."
+						+ "확인해주세요.";
+				conn.rollback();
+			}
+		} else if (result == 0) {	// 삭제되지 않은 경우
+				returnResult = "직원정보가 삭제되지 않았습니다.\nID : " + id + "를 확인해주세요.";
+		} else { // 삭제하려는 직원정보와 같은 아이디가 2개 이상 존재하는 경우
+				returnResult = "직원정보가 삭제되지 않았습니다.\nID : " + id + "가 중복되었습니다."
+						+ "확인해주세요.";
+				conn.rollback();			// 여러 개가 지워진 상태이기 때문에 rollback 해야함
 		}
 		
+		conn.setAutoCommit(true);
 		return returnResult;
 	}
 	
