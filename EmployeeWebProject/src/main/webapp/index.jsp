@@ -91,6 +91,7 @@
 	%>
 	<body>
 		<a href="insert.jsp">직원등록</a><br />
+		<h2> 직원 목록 </h2>
 		<table border="1">
 			<tr>
 				<th>번호</th>
