@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import ="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.SQLException,
-								java.sql.Statement, java.util.ArrayList, test.jdbc.oracle.Employee, test.jdbc.oracle.EmployeeService" %>
+    pageEncoding="UTF-8" isThreadSafe = "true"%>		<%--insert, delete, update는 db에 영향을 끼치기 때문에 설정 해줘야함 --%>
+<%@ page import ="java.util.ArrayList, test.jdbc.oracle.Employee, test.jdbc.oracle.EmployeeService" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -28,7 +27,8 @@
 	ArrayList<Employee> listEmp =  service.selectAll();
 	
 	System.out.println(listEmp);
-	service.close();
+	
+	// service.close();
 %>			
 			
 <%

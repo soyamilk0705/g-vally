@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import ="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.SQLException,
 								java.sql.Statement, java.util.ArrayList, test.jdbc.oracle.Employee, test.jdbc.oracle.EmployeeService" %>
+<jsp:useBean id="emp" class="test.jdbc.oracle.Employee" scope="page"/>
+<jsp:setProperty property="*" name="emp" />
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,18 +12,18 @@
 	</head>
 
 	<body>
-		<h3>직원 등록 결과</h3>
+		<h3>직원(<jsp:getProperty name="emp" property="name" />) 등록 결과</h3>
 		
 		<%	// 스크립트릿 : java 코드 삽입
 			EmployeeService service = new EmployeeService();
 
-			Employee emp = new Employee(
+			/* Employee emp = new Employee(
 						request.getParameter("id"), 
 						request.getParameter("pwd"), 
 						request.getParameter("name"), 
 						request.getParameter("phone"), 
 						request.getParameter("email"),
-						null);
+						null); */
 			
 			// 직원 등록
 			String result = service.insert(emp);
