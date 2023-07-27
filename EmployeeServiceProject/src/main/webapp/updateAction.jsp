@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import ="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.SQLException,
+	pageEncoding="UTF-8" isThreadSafe="false"%><%-- 안전 --%>
+<%@ page import="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.SQLException,
 								java.sql.Statement, java.util.ArrayList, test.jdbc.oracle.Employee, test.jdbc.oracle.EmployeeService
-								, java.util.Scanner;" %>
+								, java.util.Scanner;"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,39 +12,35 @@
 <body>
 	<h3>직원변경</h3>
 	<%
-		String id = request.getParameter("id");
+	String id = request.getParameter("id");
 	%>
-	
-	<%=id %>
 
-	<%	// 스크립트릿 : java 코드 삽입
-			EmployeeService service = new EmployeeService();		
-			
-			Employee emp = new Employee(
-					request.getParameter("id"), 
-					request.getParameter("pwd"), 
-					request.getParameter("name"), 
-					request.getParameter("phone"), 
-					request.getParameter("email"),
-					null);
-			
-			String idOriginal = (String) session.getValue("updateId");
-			
-			String result = (idOriginal.equals(emp.getId()))? service.update(emp): "id가 일치하지 않습니다. <br />관리자에게 신고바랍니다.";
-			service.close();
-	%>		
-	
-	<%=result %>
-		
+	<%=id%>
+
+	<%
+	// 스크립트릿 : java 코드 삽입
+	EmployeeService service = new EmployeeService();
+
+	Employee emp = new Employee(request.getParameter("id"), request.getParameter("pwd"), request.getParameter("name"),
+			request.getParameter("phone"), request.getParameter("email"), null);
+
+	String idOriginal = (String) session.getValue("updateId");
+
+	String result = (idOriginal.equals(emp.getId())) ? service.update(emp) : "id가 일치하지 않습니다. <br />관리자에게 신고바랍니다.";
+	service.close();
+	%>
+
+	<%=result%>
+
 	<form method="get" action="updateAction.jsp">
-	이름 : <input type="text" name="name" value="<%=emp.getName()%>"><br>
-	아이디 : <input type="text" name="id" value="<%=emp.getId()%>"><br>
-	비밀번호 : <input type="text" name="pwd" value="<%=emp.getPwd()%>"><br>
-	전화번호 : <input type="text" name="phone" value="<%=emp.getPhone()%>"><br>
-	이메일 : <input type="text" name="email" value="<%=emp.getEmail()%>"><br>
+		이름 : <input type="text" name="name" value="<%=emp.getName()%>"><br>
+		아이디 : <input type="text" name="id" value="<%=emp.getId()%>"><br>
+		비밀번호 : <input type="text" name="pwd" value="<%=emp.getPwd()%>"><br>
+		전화번호 : <input type="text" name="phone" value="<%=emp.getPhone()%>"><br>
+		이메일 : <input type="text" name="email" value="<%=emp.getEmail()%>"><br>
 
-	<input type="submit" value="수정">
-	<input type="reset" value="취소">
+		<input type="submit" value="수정"> <input type="reset"
+			value="취소">
 	</form>
 </body>
 </html>

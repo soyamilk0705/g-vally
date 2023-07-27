@@ -10,18 +10,18 @@
 </head>
 <body>
 	<h3>직원변경</h3>
-	<%
-		String id = request.getParameter("id");
-		session.putValue("updateId", id);		// session 방식은 Client가 못봄
-	%>
-	
-	<%=id %>
+<%
+	String id = request.getParameter("id");
+	session.putValue("updateId", id);		// session 방식은 Client가 못봄
+%>
 
-	<%	// 스크립트릿 : java 코드 삽입
-		EmployeeService service = new EmployeeService();
-		Employee emp = service.selectById(id);
-		
-		service.close();
+<%=id %>
+
+<%	// 스크립트릿 : java 코드 삽입
+	EmployeeService service = new EmployeeService();
+	Employee emp = service.selectById(id);
+	
+	service.close();
 %>		
 	
 		
