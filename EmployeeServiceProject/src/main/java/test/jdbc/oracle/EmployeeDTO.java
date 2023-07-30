@@ -1,7 +1,7 @@
 package test.jdbc.oracle;
 
 
-public class Employee {
+public class EmployeeDTO {
 	private String id;
 	private String pwd;
 	private String name;
@@ -9,11 +9,11 @@ public class Employee {
 	private String email;
 	private String hireDT;
 	
-	public Employee() {
+	public EmployeeDTO() {
 		super();	 // 비어있어도 상관 없음(컴파일러가 자동으로 넣어줌)
 	}
 	
-	public Employee(String id, String pwd, String name, String phone, String email, String hireDT) {
+	public EmployeeDTO(String id, String pwd, String name, String phone, String email, String hireDT) {
 		super();
 		this.id = id;
 		this.pwd = pwd;

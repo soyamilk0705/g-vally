@@ -13,18 +13,18 @@ public class EmployeeService {
 	private ConnectionPool pool;
 	private EmployeeDAO dao;
 
-	public Employee selectByName(String name) throws SQLException {	// jsp에서 static 아닌거 선호(사실 상관 없음)
-		Employee emp = dao.selectByName(name);
+	public EmployeeDTO selectByName(String name) throws SQLException {	// jsp에서 static 아닌거 선호(사실 상관 없음)
+		EmployeeDTO emp = dao.selectByName(name);
 		return emp;
 	}
 	
-	public Employee selectById(String id) throws SQLException {
-		Employee emp = dao.selectById(id);
+	public EmployeeDTO selectById(String id) throws SQLException {
+		EmployeeDTO emp = dao.selectById(id);
 		return emp;
 	}
 	
 	public String delete(String id) throws SQLException {
-		Employee emp;
+		EmployeeDTO emp;
 		String returnResult;
 		
 		int result = dao.delete(id);
@@ -45,12 +45,12 @@ public class EmployeeService {
 		return returnResult;
 	}
 	
-	public ArrayList<Employee> selectAll() throws SQLException {
-		ArrayList<Employee> listEmp = dao.selectAll();
+	public ArrayList<EmployeeDTO> selectAll() throws SQLException {
+		ArrayList<EmployeeDTO> listEmp = dao.selectAll();
 		return listEmp;
 	}
 	
-	public String insert(Employee emp) throws SQLException {
+	public String insert(EmployeeDTO emp) throws SQLException {
 		int result = dao.insert(emp);
 		String returnResult;		
 		String id =emp.getId();
@@ -70,7 +70,8 @@ public class EmployeeService {
 		return returnResult;
 	}
 	
-	public String update(Employee emp) throws SQLException {
+	
+	public String update(EmployeeDTO emp) throws SQLException {
 		int result = dao.update(emp);
 		
 		String returnResult;
