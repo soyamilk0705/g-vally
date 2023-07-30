@@ -14,40 +14,51 @@ public class EmployeeDAO {
 	private ConnectionPool pool;
 
 	// TODO Auto-generated method stub
-	public Employee selectByName(String name) throws SQLException {	// jsp에서 static 아닌거 선호(사실 상관 없음)
-		Employee emp;
+	public EmployeeDTO selectByName(String name) throws SQLException {	// jsp에서 static 아닌거 선호(사실 상관 없음)
+		conn = getConnection();
+		stmt = conn.createStatement();
+		
+		EmployeeDTO emp;
 		String sql = "select * from EmpTBL where name = '" + name + "'";
 		ResultSet result = stmt.executeQuery(sql);
 		
 		if(result.next()) {
-			emp = new Employee(result.getString("id"), result.getString("pwd"), result.getString("name"),
+			emp = new EmployeeDTO(result.getString("id"), result.getString("pwd"), result.getString("name"),
 												result.getString("phone"), result.getString("email"), result.getString("hireDT"));
 		} else {
 			emp = null;
 		}
 		
 		result.close();
+		close();
 		return emp;
 	}
 	
-	public Employee selectById(String id) throws SQLException {
-		Employee emp;
+	public EmployeeDTO selectById(String id) throws SQLException {
+		conn = getConnection();
+		stmt = conn.createStatement();
+		
+		EmployeeDTO emp;
 		String sql = "select * from EmpTBL where id = '" + id + "'";
 		ResultSet result = stmt.executeQuery(sql);
 		
 		if(result.next()) {
-			emp = new Employee(result.getString("id"), result.getString("pwd"), result.getString("name"),
+			emp = new EmployeeDTO(result.getString("id"), result.getString("pwd"), result.getString("name"),
 												result.getString("phone"), result.getString("email"), result.getString("hireDT"));
 		} else {
 			emp = null;
 		}
 		
 		result.close();
+		close();
 		return emp;
 	}
 	
 	public int delete(String id) throws SQLException {
-		Employee emp;
+		conn = getConnection();
+		stmt = conn.createStatement();
+		
+		EmployeeDTO emp;
 		String returnResult;
 		
 		String sql = "delete from EmpTBL where id = '" + id + "'";
@@ -60,14 +71,17 @@ public class EmployeeDAO {
 		} else {
 			conn.rollback();
 		}
-		
+		close();
 		return result;
 	}
 	
-	public ArrayList<Employee> selectAll() throws SQLException {
+	public ArrayList<EmployeeDTO> selectAll() throws SQLException {
+		conn = getConnection();
+		stmt = conn.createStatement();
+		
 		String sql = "select * from EmpTBL";
 		ResultSet result = stmt.executeQuery(sql);
-		ArrayList<Employee> listEmp = new ArrayList<Employee>();
+		ArrayList<EmployeeDTO> listEmp = new ArrayList<EmployeeDTO>();
 		
 		while(result.next()) {
 			String id = result.getString("id");
@@ -77,27 +91,33 @@ public class EmployeeDAO {
 			String email = result.getString("email");
 			String hireDT = result.getString("hireDT");
 			
-			Employee emp = new Employee(id, pwd, name, phone, email, hireDT);
+			EmployeeDTO emp = new EmployeeDTO(id, pwd, name, phone, email, hireDT);
 			listEmp.add(emp);
 			
 		}
 		
 		result.close();
+		close();
 		return listEmp;
 	}
 	
-	public int insert(Employee emp) throws SQLException {
+	public int insert(EmployeeDTO emp) throws SQLException {
+		conn = getConnection();
+		stmt = conn.createStatement();
+		
 		String returnResult;		
 		String id =emp.getId();
 		String sql = "insert into EmpTBL (seq, id, pwd, name, phone, email, hireDT)\n"
 				+ " values (seq_EmpTBL.NEXTVAL, '"+ emp.getId() +"', '"+ emp.getPwd() +"', '"+ emp.getName() +"', '"+ emp.getPhone() +"', '"+ emp.getEmail() + "', sysdate)";
 		int result  = stmt.executeUpdate(sql);	// insert, delete, update 실행 시 사용
-
+		close();
 		return result;
 	}
 	
-	public int update(Employee emp) throws SQLException {
-		Connection conn = stmt.getConnection();		// stmt에서 getConnection()을 했기 때문에 close 하면 안됨
+	public int update(EmployeeDTO emp) throws SQLException {
+		conn = getConnection();
+		stmt = conn.createStatement();
+//		Connection conn = stmt.getConnection();		// stmt에서 getConnection()을 했기 때문에 close 하면 안됨
 																			// (위에서 manager에서 connection을 하고 그 connection으로 stmt를 만듦
 																			// 그 stmt에 connection을 받아온 것 뿐 새로 connection을 만든게 아님)
 		conn.setAutoCommit(false);	// update 시 unique 값으로 주지 않은 문제 생김 -> 근데 이미 쿼리를 날려서 이미 데이터는 바뀜 
@@ -118,9 +138,13 @@ public class EmployeeDAO {
 		}
 		
 		conn.setAutoCommit(true);
+		close();
 		return result;
 	}
 	
+	public Connection getConnection() throws SQLException{
+		return pool.getConnection();
+	}
 	
 	public void close() throws SQLException {
 		stmt.close();
@@ -150,31 +174,31 @@ public class EmployeeDAO {
 		try {
 //			conn = DriverManager.getConnection(url, user, password);
 			pool = new ConnectionPool(url, user, password, 3, 5, true, 10);
-			conn = pool.getConnection();
+//			conn = pool.getConnection(true, 5);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("DBMS 정보 확인 필요!!!\n"
 					+ url + "\n" + user + "\n" + password + "\n");
 		}
 		
-		try {
-			stmt = conn.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-			while(true) {
-				try {
-					Thread.sleep(300);
-				} catch(InterruptedException e1) {
-					e1.printStackTrace();
-				}
-				try {
-					stmt = conn.createStatement();
-				} catch(SQLException e1) {
-					System.out.println(e1.getMessage());
-				}
-			}
-		}
+//		try {
+//			stmt = conn.createStatement();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			
+//			while(true) {
+//				try {
+//					Thread.sleep(300);
+//				} catch(InterruptedException e1) {
+//					e1.printStackTrace();
+//				}
+//				try {
+//					stmt = conn.createStatement();
+//				} catch(SQLException e1) {
+//					System.out.println(e1.getMessage());
+//				}
+//			}
+//		}
 		
 		return pool;
 	}
