@@ -13,7 +13,7 @@ public class EmployeeService {
 	private ConnectionPool pool;
 	private EmployeeDAO dao;
 
-	public EmployeeDTO selectByName(String name) throws SQLException {	// jsp¿¡¼­ static ¾Æ´Ñ°Å ¼±È£(»ç½Ç »ó°ü ¾øÀ½)
+	public EmployeeDTO selectByName(String name) throws SQLException {	// jspì—ì„œ static ì•„ë‹Œê±° ì„ í˜¸(ì‚¬ì‹¤ ìƒê´€ ì—†ìŒ)
 		EmployeeDTO emp = dao.selectByName(name);
 		return emp;
 	}
@@ -32,14 +32,14 @@ public class EmployeeService {
 		
 		if(result == 1) {
 			if (emp == null) {
-				returnResult = "ID : " + id + "ÀÇ Á÷¿øÁ¤º¸ " + result + "°³°¡ »èÁ¦µÇ¾ú½À´Ï´Ù.\n";
+				returnResult = "ID : " + id + "ì˜ ì§ì›ì •ë³´ " + result + "ê°œê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.\n";
 			} else {
-				returnResult = emp.getId() + "ÀÇ µ¥ÀÌÅÍ°¡ 2°³ ÀÌ»óÀÔ´Ï´Ù. µû¶ó¼­ »èÁ¦ÇÏ·Á´Â Á¤º¸´Â ¿ø»óº¹±¸µË´Ï´Ù.\n"
-						+ "<br /> °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇÏ¼¼¿ä.";
+				returnResult = emp.getId() + "ì˜ ë°ì´í„°ê°€ 2ê°œ ì´ìƒì…ë‹ˆë‹¤. ë”°ë¼ì„œ ì‚­ì œí•˜ë ¤ëŠ” ì •ë³´ëŠ” ì›ìƒë³µêµ¬ë©ë‹ˆë‹¤.\n"
+						+ "<br /> ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•˜ì„¸ìš”.";
 			}
-		} else {		// ¿©·¯¸íÀ» Áö¿üÀ» °æ¿ì
-			returnResult = emp.getId() + "ÀÇ µ¥ÀÌÅÍ°¡ 2°³ ÀÌ»óÀÔ´Ï´Ù. µû¶ó¼­ »èÁ¦ÇÏ·Á´Â Á¤º¸´Â ¿ø»óº¹±¸µË´Ï´Ù.\n"
-					+ "<br /> °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇÏ¼¼¿ä.";
+		} else {		// ì—¬ëŸ¬ëª…ì„ ì§€ì› ì„ ê²½ìš°
+			returnResult = emp.getId() + "ì˜ ë°ì´í„°ê°€ 2ê°œ ì´ìƒì…ë‹ˆë‹¤. ë”°ë¼ì„œ ì‚­ì œí•˜ë ¤ëŠ” ì •ë³´ëŠ” ì›ìƒë³µêµ¬ë©ë‹ˆë‹¤.\n"
+					+ "<br /> ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•˜ì„¸ìš”.";
 		}
 		
 		return returnResult;
@@ -55,16 +55,16 @@ public class EmployeeService {
 		String returnResult;		
 		String id =emp.getId();
 		
-		if (result == 1) {	// ¼º°ø
-			emp = selectByName(emp.getName());	// emp(ÇöÀç) : »ç¿ëÀÚ ÀÔ·Â µ¥ÀÌÅÍ
-																				// emp(new) : DB¿¡¼­ °¡Á®¿Â µ¥ÀÌÅÍ
+		if (result == 1) {	// ì„±ê³µ
+			emp = selectByName(emp.getName());	// emp(í˜„ì¬) : ì‚¬ìš©ì ì…ë ¥ ë°ì´í„°
+																				// emp(new) : DBì—ì„œ ê°€ì ¸ì˜¨ ë°ì´í„°
 			if (emp.getId().equals(id)) {						
-				returnResult = "Á÷¿øÁ¤º¸°¡ Á¤»óÀûÀ¸·Î ÀÔ·ÂµÇ¾ú½À´Ï´Ù.<br />" + emp;
+				returnResult = "ì§ì›ì •ë³´ê°€ ì •ìƒì ìœ¼ë¡œ ì…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤.<br />" + emp;
 			} else {
-				returnResult = "Á÷¿øÁ¤º¸°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù. <br />´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+				returnResult = "ì§ì›ì •ë³´ê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤. <br />ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.";
 			}
-		} else {	// ½ÇÆĞ : return 0
-			returnResult = "Á÷¿øÁ¤º¸°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù.<br /> ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+		} else {	// ì‹¤íŒ¨ : return 0
+			returnResult = "ì§ì›ì •ë³´ê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.<br /> ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.";
 		}
 
 		return returnResult;
@@ -77,18 +77,28 @@ public class EmployeeService {
 		String returnResult;
 		
 		if (result == 1) {
-			emp = selectById(emp.getId());		// ºÒÇÕ¸®ÇÔ: service¿¡¼­ selectById¸¦ ÇÒÁö dao¿¡¼­ selectById¸¦ ¾µÁö Á¤ÇÏ°í ³­ ÈÄ Áö¿ï°ÅÀÓ(³» ¸¶À½µ¥·Î ÆÇ´Ü ºÒ°¡)
-			returnResult = emp.getName() + "ÀÇ Á¤º¸°¡ Á¤»óÀûÀ¸·Î ¼öÁ¤µÇ¾ú½À´Ï´Ù.<br />" + emp + "<br />";
+			emp = selectById(emp.getId());		// ë¶ˆí•©ë¦¬í•¨: serviceì—ì„œ selectByIdë¥¼ í• ì§€ daoì—ì„œ selectByIdë¥¼ ì“¸ì§€ ì •í•˜ê³  ë‚œ í›„ ì§€ìš¸ê±°ì„(ë‚´ ë§ˆìŒë°ë¡œ íŒë‹¨ ë¶ˆê°€)
+			returnResult = emp.getName() + "ì˜ ì •ë³´ê°€ ì •ìƒì ìœ¼ë¡œ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.<br />" + emp + "<br />";
 
 		} else if(result == 0) {
-			returnResult = emp.getName() + "ÀÇ Á¤º¸°¡ Á¤»óÀûÀ¸·Î ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.<br />" + emp + "<br />¼öÁ¤ÇÒ Á¤º¸¸¦ ´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä.";
+			returnResult = emp.getName() + "ì˜ ì •ë³´ê°€ ì •ìƒì ìœ¼ë¡œ ìˆ˜ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.<br />" + emp + "<br />ìˆ˜ì •í•  ì •ë³´ë¥¼ ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”.";
 
-		} else {	// °°Àº id°¡ ¿©·¯¸í
-			returnResult = emp.getId() +  "ÀÇ µ¥ÀÌÅÍ°¡ 2°³ ÀÌ»óÀÔ´Ï´Ù. µû¶ó¼­ ÀÔ·ÂÇÑ Á¤º¸°¡ ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù."
-					+ "<br /> °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇÏ¼¼¿ä.";
+		} else {	// ê°™ì€ idê°€ ì—¬ëŸ¬ëª…
+			returnResult = emp.getId() +  "ì˜ ë°ì´í„°ê°€ 2ê°œ ì´ìƒì…ë‹ˆë‹¤. ë”°ë¼ì„œ ì…ë ¥í•œ ì •ë³´ê°€ ìˆ˜ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤."
+					+ "<br /> ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•˜ì„¸ìš”.";
 		}
 		
 		return returnResult;
+	}
+	
+	public EmployeeDTO login(EmployeeDTO emp) throws SQLException {
+		EmployeeDTO empFromDB =  dao.selectById(emp.getId());
+		
+		if (emp.getPwd().equals(empFromDB.getPwd())) {
+			return empFromDB;
+		} else {
+			return null;
+		}
 	}
 	
 	public EmployeeService() throws SQLException {
@@ -97,4 +107,3 @@ public class EmployeeService {
 //		dao.close();
 	}
 }
-
