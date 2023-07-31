@@ -59,13 +59,13 @@ import java.util.Vector;
  * <p>
  *
  **/
-public final class ConnectionPool {	// final : °´Ã¼´Â »ı¼º °¡´ÉÇÏÁö¸¸ »ó¼Ó ºÒ°¡
+public final class ConnectionPool {	// final : ê°ì²´ëŠ” ìƒì„± ê°€ëŠ¥í•˜ì§€ë§Œ ìƒì† ë¶ˆê°€
 
     // Print debug information to System.err.
     private static final boolean debug = true;
 
     // Storage for the unused connections.
-    private Vector free;		// free ¾È¿¡ connection ¿©·¯°³ ¸¸µê
+    private Vector free;		// free ì•ˆì— connection ì—¬ëŸ¬ê°œ ë§Œë“¦
 
   static final String jdbcclass = "oracle.jdbc.OracleDriver";   
  // Storage for the allocated connections.
@@ -78,21 +78,21 @@ public final class ConnectionPool {	// final : °´Ã¼´Â »ı¼º °¡´ÉÇÏÁö¸¸ »ó¼Ó ºÒ°¡
     private String password;
     private Properties info;
 
-    // ÃÊ±â connection °¹¼ö ¼³Á¤
+    // ì´ˆê¸° connection ê°¯ìˆ˜ ì„¤ì •
     private int initialCons = 0;		
   
-    // Maximum number of concurrent connections allowed. oracle dbÀÇ max connectionÀº 50°³ (±âº»ÀûÀ¸·Î 5°³ Á¤µµÇÔ)
+    // Maximum number of concurrent connections allowed. oracle dbì˜ max connectionì€ 50ê°œ (ê¸°ë³¸ì ìœ¼ë¡œ 5ê°œ ì •ë„í•¨)
     private int maxCons = 0;
 
     // The number of connection that have been created.
     private int numCons = 0;
 
     // Whether to block until a connection is free when maxCons are in use.
-    // maxCons°¡ ÀüºÎ »ç¿ëÁßÀÌ¸é ±â´Ù¸®°Ú´Ù´Â ÀÇ¹Ì
+    // maxConsê°€ ì „ë¶€ ì‚¬ìš©ì¤‘ì´ë©´ ê¸°ë‹¤ë¦¬ê² ë‹¤ëŠ” ì˜ë¯¸
     private boolean block;
 
     // Timeout waiting for a connection to be released when blocking.
-    // block¿¡ ´ëÇÑ timeoutÀ» ¾ó¸¶³ª ÁÙ°ÇÁö °áÁ¤(º¸Åë browser¿¡¼­ timeoutÀÌ °É·ÁÀÖ±â ¶§¹®¿¡ º° ÀÇ¹Ì ¾øÀ½)
+    // blockì— ëŒ€í•œ timeoutì„ ì–¼ë§ˆë‚˜ ì¤„ê±´ì§€ ê²°ì •(ë³´í†µ browserì—ì„œ timeoutì´ ê±¸ë ¤ìˆê¸° ë•Œë¬¸ì— ë³„ ì˜ë¯¸ ì—†ìŒ)
     private long timeout;
 
     // Whether we should re-use connections or not
@@ -124,7 +124,7 @@ public final class ConnectionPool {	// final : °´Ã¼´Â »ı¼º °¡´ÉÇÏÁö¸¸ »ó¼Ó ºÒ°¡
      * @see	  java.sql.DriverManager
      * @see	  java.sql.DriverManager#getConnection(String, String, String)
      **/
-    public ConnectionPool(String url, String user, String password,			// url, user, password »©°ï default °ª Á¸Àç
+    public ConnectionPool(String url, String user, String password,			// url, user, password ë¹¼ê³¤ default ê°’ ì¡´ì¬
 			  int initialCons, int maxCons, boolean block,
 			  long timeout) throws SQLException {
 
@@ -136,12 +136,12 @@ public final class ConnectionPool {	// final : °´Ã¼´Â »ı¼º °¡´ÉÇÏÁö¸¸ »ó¼Ó ºÒ°¡
 	this.block = block;
 	this.timeout = timeout;
 	
-	try {		// À¥¿¡¼­ ÇØ°á ÇØ¾ßµÊ : try-catch ¾µÁö throw ¾µÁö ¼±ÅÃÀº °³¹ßÀÚ°¡ ÇØ°á ÇÒ ¼ö ÀÖ´À³Ä·Î °áÁ¤
+	try {		// ì›¹ì—ì„œ í•´ê²° í•´ì•¼ë¨ : try-catch ì“¸ì§€ throw ì“¸ì§€ ì„ íƒì€ ê°œë°œìê°€ í•´ê²° í•  ìˆ˜ ìˆëŠëƒë¡œ ê²°ì •
 		Class.forName(jdbcclass);
 	} catch (ClassNotFoundException e) {
 		e.printStackTrace();
-		System.out.println("¿À¶óÅ¬ µå¶óÀÌ¹ö°¡¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.\n "
-				+ "lib Æú´õ¿¡ ojdbc*.jar ¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
+		System.out.println("ì˜¤ë¼í´ ë“œë¼ì´ë²„ê°€ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n "
+				+ "lib í´ë”ì— ojdbc*.jar ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
 	}
 
 	// maxCons has precedence over initialCons
@@ -189,7 +189,7 @@ public final class ConnectionPool {	// final : °´Ã¼´Â »ı¼º °¡´ÉÇÏÁö¸¸ »ó¼Ó ºÒ°¡
 	while (cons.hasMoreElements()) {
 	    Connection con = (Connection)cons.nextElement();
 
-	    used.removeElement(con);			// used´Â »ç¿ëÇÏ°í ÀÖÀ» ¼öµµ ÀÖ¾î¼­ close() ¾ÈÇÔ
+	    used.removeElement(con);			// usedëŠ” ì‚¬ìš©í•˜ê³  ìˆì„ ìˆ˜ë„ ìˆì–´ì„œ close() ì•ˆí•¨
        
 	}
     }
@@ -369,7 +369,7 @@ return con;
      *		      this pool.
      * @see	  #getConnection
      **/
-public synchronized void releaseConnection(Connection con)		// close ´ë½Å ¹İ³³
+public synchronized void releaseConnection(Connection con)		// close ëŒ€ì‹  ë°˜ë‚©
 throws SQLException {
 
   boolean reuseThisCon = reuseCons;

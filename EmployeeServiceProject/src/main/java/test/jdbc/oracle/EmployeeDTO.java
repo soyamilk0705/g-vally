@@ -10,7 +10,7 @@ public class EmployeeDTO {
 	private String hireDT;
 	
 	public EmployeeDTO() {
-		super();	 // ºñ¾îÀÖ¾îµµ »ó°ü ¾øÀ½(ÄÄÆÄÀÏ·¯°¡ ÀÚµ¿À¸·Î ³Ö¾îÁÜ)
+		super();	 // ë¹„ì–´ìˆì–´ë„ ìƒê´€ ì—†ìŒ(ì»´íŒŒì¼ëŸ¬ê°€ ìë™ìœ¼ë¡œ ë„£ì–´ì¤Œ)
 	}
 	
 	public EmployeeDTO(String id, String pwd, String name, String phone, String email, String hireDT) {

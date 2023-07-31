@@ -14,7 +14,7 @@ public class EmployeeDAO {
 	private ConnectionPool pool;
 
 	// TODO Auto-generated method stub
-	public EmployeeDTO selectByName(String name) throws SQLException {	// jsp¿¡¼­ static ¾Æ´Ñ°Å ¼±È£(»ç½Ç »ó°ü ¾øÀ½)
+	public EmployeeDTO selectByName(String name) throws SQLException {	// jspì—ì„œ static ì•„ë‹Œê±° ì„ í˜¸(ì‚¬ì‹¤ ìƒê´€ ì—†ìŒ)
 		conn = getConnection();
 		stmt = conn.createStatement();
 		
@@ -57,6 +57,7 @@ public class EmployeeDAO {
 	public int delete(String id) throws SQLException {
 		conn = getConnection();
 		stmt = conn.createStatement();
+		conn.setAutoCommit(false);
 		
 		EmployeeDTO emp;
 		String returnResult;
@@ -71,6 +72,8 @@ public class EmployeeDAO {
 		} else {
 			conn.rollback();
 		}
+		
+		conn.setAutoCommit(true);
 		close();
 		return result;
 	}
@@ -104,12 +107,21 @@ public class EmployeeDAO {
 	public int insert(EmployeeDTO emp) throws SQLException {
 		conn = getConnection();
 		stmt = conn.createStatement();
+		conn.setAutoCommit(false);
 		
 		String returnResult;		
 		String id =emp.getId();
 		String sql = "insert into EmpTBL (seq, id, pwd, name, phone, email, hireDT)\n"
 				+ " values (seq_EmpTBL.NEXTVAL, '"+ emp.getId() +"', '"+ emp.getPwd() +"', '"+ emp.getName() +"', '"+ emp.getPhone() +"', '"+ emp.getEmail() + "', sysdate)";
-		int result  = stmt.executeUpdate(sql);	// insert, delete, update ½ÇÇà ½Ã »ç¿ë
+		int result  = stmt.executeUpdate(sql);	// insert, delete, update ì‹¤í–‰ ì‹œ ì‚¬ìš©
+		
+		if (result == 1) {
+			conn.commit();
+		} else {
+			conn.rollback();
+		}
+		
+		conn.setAutoCommit(true);
 		close();
 		return result;
 	}
@@ -117,11 +129,11 @@ public class EmployeeDAO {
 	public int update(EmployeeDTO emp) throws SQLException {
 		conn = getConnection();
 		stmt = conn.createStatement();
-//		Connection conn = stmt.getConnection();		// stmt¿¡¼­ getConnection()À» Çß±â ¶§¹®¿¡ close ÇÏ¸é ¾ÈµÊ
-																			// (À§¿¡¼­ manager¿¡¼­ connectionÀ» ÇÏ°í ±× connectionÀ¸·Î stmt¸¦ ¸¸µê
-																			// ±× stmt¿¡ connectionÀ» ¹Ş¾Æ¿Â °Í »Ó »õ·Î connectionÀ» ¸¸µç°Ô ¾Æ´Ô)
-		conn.setAutoCommit(false);	// update ½Ã unique °ªÀ¸·Î ÁÖÁö ¾ÊÀº ¹®Á¦ »ı±è -> ±Ùµ¥ ÀÌ¹Ì Äõ¸®¸¦ ³¯·Á¼­ ÀÌ¹Ì µ¥ÀÌÅÍ´Â ¹Ù²ñ 
-													// -> ÀÌ·¯ÇÑ ¹®Á¦¸¦ ÇØ°áÇÏ±â À§ÇØ auto commit ²û
+//		Connection conn = stmt.getConnection();		// stmtì—ì„œ getConnection()ì„ í–ˆê¸° ë•Œë¬¸ì— close í•˜ë©´ ì•ˆë¨
+																			// (ìœ„ì—ì„œ managerì—ì„œ connectionì„ í•˜ê³  ê·¸ connectionìœ¼ë¡œ stmtë¥¼ ë§Œë“¦
+																			// ê·¸ stmtì— connectionì„ ë°›ì•„ì˜¨ ê²ƒ ë¿ ìƒˆë¡œ connectionì„ ë§Œë“ ê²Œ ì•„ë‹˜)
+		conn.setAutoCommit(false);	// update ì‹œ unique ê°’ìœ¼ë¡œ ì£¼ì§€ ì•Šì€ ë¬¸ì œ ìƒê¹€ -> ê·¼ë° ì´ë¯¸ ì¿¼ë¦¬ë¥¼ ë‚ ë ¤ì„œ ì´ë¯¸ ë°ì´í„°ëŠ” ë°”ë€œ 
+													// -> ì´ëŸ¬í•œ ë¬¸ì œë¥¼ í•´ê²°í•˜ê¸° ìœ„í•´ auto commit ë”
 		
 		String sql = "update EmpTBL set pwd = '" + emp.getPwd() + "', "
 				+ "name = '" + emp.getName() + "', "
@@ -133,8 +145,8 @@ public class EmployeeDAO {
 		
 		if (result == 1) {
 			conn.commit();
-		} else {	// °°Àº id°¡ ¿©·¯¸í ¶Ç´Â Á¸ÀçÇÏÁö ¾ÊÀ½
-			conn.rollback();		// DB ¼­¹ö¿¡¼­ ¼öÇàµÇ´Â ÀÏ
+		} else {	// ê°™ì€ idê°€ ì—¬ëŸ¬ëª… ë˜ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŒ
+			conn.rollback();		// DB ì„œë²„ì—ì„œ ìˆ˜í–‰ë˜ëŠ” ì¼
 		}
 		
 		conn.setAutoCommit(true);
@@ -159,12 +171,12 @@ public class EmployeeDAO {
 		
 //		String className = "oracle.jdbc.driver.OracleDriver";		
 //
-//		try {		// À¥¿¡¼­ ÇØ°á ÇØ¾ßµÊ : try-catch ¾µÁö throw ¾µÁö ¼±ÅÃÀº °³¹ßÀÚ°¡ ÇØ°á ÇÒ ¼ö ÀÖ´À³Ä·Î °áÁ¤
+//		try {		// ì›¹ì—ì„œ í•´ê²° í•´ì•¼ë¨ : try-catch ì“¸ì§€ throw ì“¸ì§€ ì„ íƒì€ ê°œë°œìê°€ í•´ê²° í•  ìˆ˜ ìˆëŠëƒë¡œ ê²°ì •
 //			Class.forName(className);
 //		} catch (ClassNotFoundException e) {
 //			e.printStackTrace();
-//			System.out.println("¿À¶óÅ¬ µå¶óÀÌ¹ö°¡¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.\n "
-//					+ "lib Æú´õ¿¡ ojdbc*.jar ¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
+//			System.out.println("ì˜¤ë¼í´ ë“œë¼ì´ë²„ê°€ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n "
+//					+ "lib í´ë”ì— ojdbc*.jar ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
 //		}
 
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -177,7 +189,7 @@ public class EmployeeDAO {
 //			conn = pool.getConnection(true, 5);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("DBMS Á¤º¸ È®ÀÎ ÇÊ¿ä!!!\n"
+			System.out.println("DBMS ì •ë³´ í™•ì¸ í•„ìš”!!!\n"
 					+ url + "\n" + user + "\n" + password + "\n");
 		}
 		
@@ -203,4 +215,3 @@ public class EmployeeDAO {
 		return pool;
 	}
 }
-
