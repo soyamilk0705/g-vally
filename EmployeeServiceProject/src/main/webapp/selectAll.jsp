@@ -15,6 +15,6 @@
 	System.out.println(listEmp);
 	session.setAttribute("listEmp", listEmp);
 %>			
-<jsp:forward page="viewListEmp.jsp" ></jsp:forward>			
+<jsp:include page="viewListEmp.jsp" ></jsp:include>			
 </body>
 </html>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.SQLException,
-								java.sql.Statement, java.util.ArrayList,test.jdbc.oracle.EmployeeDTO,test.jdbc.oracle.EmployeeService" %>
+<%@ page import ="test.jdbc.oracle.EmployeeDTO,test.jdbc.oracle.EmployeeService" %>
 <jsp:useBean id="emp" class="test.jdbc.oracle.EmployeeDTO" scope="request"/>		<%-- useBean : 객체가 존재하면 존재하는걸 사용하고 없으면 새로 생성 --%>
 <%-- <jsp:useBean id="result" class="java.lang.String" scope="request"/> --%>
 <!DOCTYPE html>
