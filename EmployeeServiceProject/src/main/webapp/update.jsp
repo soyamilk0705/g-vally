@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="test.jdbc.oracle.EmployeeDTO,test.jdbc.oracle.EmployeeService" %>
 <jsp:useBean id="emp" class="test.jdbc.oracle.EmployeeDTO" scope="request"/>
 <jsp:useBean id="service" class="test.jdbc.oracle.EmployeeService" scope="application"/>
 <jsp:setProperty property="*" name="emp" /> 
@@ -11,7 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>직원변경</h3>
+<h3>직원변경</h3>
+
 <%
 	//session 방식은 Client가 못봄(내장 객체)
 	session.putValue("updateId", emp.getId());		// updateAction에서 id를 검증하기 위해 사용

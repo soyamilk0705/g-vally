@@ -9,13 +9,13 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 	</head>
-
 	<body>
+	<jsp:include page="checkLogin.jsp"></jsp:include>
 	<h3>직원(<jsp:getProperty name="emp" property="name" />) 등록 결과</h3> 
-		<%
-			// String result = (String) session.getAttribute("result");
-			String result = (String) request.getAttribute("result"); 
-		%>
+	<%
+		// String result = (String) session.getAttribute("result");
+		String result = (String) request.getAttribute("result"); 
+	%>
 		<%= result %><br/>
 		
 		<a href="index.jsp">직원목록</a>	<%-- 문서 안에서 특정한 위치에 가고 싶으면 이용하면 됨 --%>
