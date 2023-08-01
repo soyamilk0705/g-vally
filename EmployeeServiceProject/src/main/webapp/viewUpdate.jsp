@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="test.jdbc.oracle.EmployeeDTO,test.jdbc.oracle.EmployeeService" %>
 <jsp:useBean id="emp" class="test.jdbc.oracle.EmployeeDTO" scope="request"/>
 <!DOCTYPE html>
 <html>
@@ -9,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:useBean id="listEmp" class="java.util.ArrayList<test.jdbc.oracle.EmployeeDTO>" scope="request"/>
 	<h3>직원변경</h3>
 	<form method="get" action="updateAction.jsp">
 	이름 : <input type="text" name="name" value="<%=emp.getName()%>"><br>
