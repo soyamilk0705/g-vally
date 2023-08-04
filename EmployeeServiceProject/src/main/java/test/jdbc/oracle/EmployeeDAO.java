@@ -54,18 +54,13 @@ public class EmployeeDAO {
 		return emp;
 	}
 	
-	public int delete(String id) throws SQLException {
+	public int delete(EmployeeDTO emp) throws SQLException {
 		conn = getConnection();
 		stmt = conn.createStatement();
 		conn.setAutoCommit(false);
-		
-		EmployeeDTO emp;
-		String returnResult;
-		
-		String sql = "delete from EmpTBL where id = '" + id + "'";
+				
+		String sql = "delete from EmpTBL where id = '" + emp.getId() + "'";
 		int result = stmt.executeUpdate(sql);
-		
-//		emp = selectById(id);
 		
 		if (result == 1) {
 			conn.commit();
