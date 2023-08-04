@@ -17,12 +17,6 @@
 			emp = service.login(emp);
 			request.setAttribute("emp", emp);
 			
-			// Cookie를 통한 로그인
-			/* Cookie login = new Cookie("login", emp.getName());	// Cookie 는 String 만 넘길 수 있음
-			System.out.println(emp.getName());
-			response.addCookie(login);		// 여러 개 담을 수 있어서 set이 아닌 add 
-			System.out.println("loginAction.jsp::" + login.getValue()); */
-			
 			// emp == null, NullPointException 발생
 			session.setAttribute("login", emp.getName());
 			System.out.println("loginAction.jsp :: session :: " + session.getAttribute("login"));

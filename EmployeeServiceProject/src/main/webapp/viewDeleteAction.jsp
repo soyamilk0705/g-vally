@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <jsp:useBean id="result" class="java.lang.String" scope="request"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-	String result = (String) request.getAttribute("result");
-%>
+<jsp:include page="checkLogin.jsp"></jsp:include>
 <%=result %>
 <a href="index.jsp">목록으로</a>
 </body>
