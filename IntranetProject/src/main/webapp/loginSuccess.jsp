@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<jsp:useBean id="emp" class="intranet.entity.EmpEntity" scope="request"/>
 <!--  Session 처리 부분 구현 -->
 
 
@@ -17,7 +16,6 @@
 
 <a href="index.html">홈화면으로</a><br /><br />
 <!--  사용자 ID 출력 구현 -->
-<%=emp.getEmpName() %> 님
 
 좋은 하루 되세요~~<br/>
 <br/><br/><br/>

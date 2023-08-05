@@ -1,9 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 
-
-
-
 <!--  수강생 작성 -->
 
 <%
