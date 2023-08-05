@@ -1,4 +1,4 @@
-package intranet.dao;
+package common;
 
 /*
  * @(#)ConnectionPool.java	1.12 98/02/27
