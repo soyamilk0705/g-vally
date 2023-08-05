@@ -1,5 +1,9 @@
 package intranet.entity;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.Base64.Decoder;
 
 public class EmployeeDTO {
 	private String id;
@@ -10,7 +14,7 @@ public class EmployeeDTO {
 	private String hireDT;
 	
 	public EmployeeDTO() {
-		super();	 // ë¹„ì–´?ˆ?–´?„ ?ƒê´? ?—†?Œ(ì»´íŒŒ?¼?Ÿ¬ê°? ??™?œ¼ë¡? ?„£?–´ì¤?)
+		super();	 // ë¹„ì–´ìˆì–´ë„ ìƒê´€ ì—†ìŒ(ì»´íŒŒì¼ëŸ¬ê°€ ìë™ìœ¼ë¡œ ë„£ì–´ì¤Œ)
 	}
 	
 	public EmployeeDTO(String id, String pwd, String name, String phone, String email, String hireDT) {
@@ -78,6 +82,7 @@ public class EmployeeDTO {
 	public void setHireDT(String hireDT) {
 		this.hireDT = hireDT;
 	}
+	
 	
 	
 }
