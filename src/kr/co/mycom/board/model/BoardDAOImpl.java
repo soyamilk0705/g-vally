@@ -7,7 +7,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 public class BoardDAOImpl implements BoardDAO {
 
-	private SqlMapClientTemplate sqlMapClientTemplate;
+	private SqlMapClientTemplate sqlMapClientTemplate;		// applicationContext.xml에서 등록해서 사용함
 	
 	public void setSqlMapClientTemplate(
 			SqlMapClientTemplate sqlMapClientTemplate) {
@@ -16,12 +16,12 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	@Override
 	public void insertBoard(BoardDTO dto) {
-		sqlMapClientTemplate.insert("insertBoard", dto);
+		sqlMapClientTemplate.insert("insertBoard", dto); // 함수명(insert) - 태그 이름,  id "insertBoard", 파라미터 이름 dto
 	}
 
 	@Override
 	public List<BoardDTO> getBoardList(HashMap map) {
-		return sqlMapClientTemplate.queryForList("getBoardList",map);
+		return sqlMapClientTemplate.queryForList("getBoardList",map);		// id는 필수
 	}
 
 	@Override

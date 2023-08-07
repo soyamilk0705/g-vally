@@ -22,7 +22,7 @@ public class BoardController {
 	@Resource
 	private BoardService boardService;
 	
-	@RequestMapping("/writeform.htm")
+	@RequestMapping("/writeform.htm")		// url로 들어올 수 없게 view 안에 넣어놨기 때문에 접근 가능하게 할당 해줘야함
 	public String writeform(){
 		return "writeform";
 	}//ModelAndView를 리턴하는것과 같음

@@ -31,11 +31,12 @@
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	
-	<!--  Impl 이용해서 DAO 클래스 만들고 sqlMapClientTemplate controll 할거임 -->
+	<!--  Impl 이용해서 DAO 클래스 만들고 sqlMapClientTemplate control 할거임 -->
 	<bean id="boardDAO" class="kr.co.mycom.board.model.BoardDAOImpl">
 		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
 	</bean>
 	
+	<!-- id는 객체명 -->
 	<bean id="boardService" class="kr.co.mycom.board.Service.BoardServiceImpl">
 		<property name="boardDAO" ref="boardDAO"></property>
 	</bean>

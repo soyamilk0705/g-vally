@@ -14,7 +14,7 @@
  <!-- typeAlias : 해당 클래스에 별명 지정  -->
  <typeAlias alias="board" type="kr.co.mycom.board.model.BoardDTO" />
  
- <insert id="insertBoard" parameterClass="board">
+ <insert id="insertBoard" parameterClass="board">	<!--  id = dao에서 어떤 이름으로 찾을 건지 지정 -->
  	insert into board(num, name, email, pwd, subject, content, regdate, hit, parent, sort, tab)
 	values( (select NVL(max(num),0)+1 from board), #name#,#email#,#pwd#,#subject#,#content#,SYSDATE,0,(select NVL(max(num),0)+1 from board),0,0)
  </insert> 
@@ -34,8 +34,9 @@
 	<result property="sort" column="sort" />  	
 	<result property="tab" column="tab" />  	
 	
- </resultMap>
+ </resultMap>	<!-- resultMap, resultClass = 쿼리문을 실행하고 결과를 뭘 넘겨줄건지 작성 -->
  
+ <!--  parameter는 hashMap으로 씀(hashmap을 받겠다), 키 값으로 가져오기 위해서  -->
  <select id="getBoardList" parameterClass="hashmap" resultMap="boardResult">	<!-- #_# : hashmap의 키값, return은 arrayList<boardResult>로 됨-->
  	select * from
  	 (select A.*,ROWNUM r from 
