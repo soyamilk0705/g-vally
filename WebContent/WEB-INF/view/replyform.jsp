@@ -47,8 +47,8 @@ function board_reply(){
 		<th>이름</th>
 		<td>
 			<!-- 히든 필드로 정보 보내기 -->
-			<input type="hidden" name="pg" value="${pg}"/>
-			<input type="hidden" name="parent" value="${b.parent}"/>
+			<input type="hidden" name="pg" value="${param.pg}"/>
+			<input type="hidden"  name="parent" value="${b.parent}"/>
 			<input type="hidden" name="sort" value="${b.sort}"/>
 			<input type="hidden" name="tab" value="${b.tab}"/>
 			<!-- 히든 필드로 정보 보내기 -->
