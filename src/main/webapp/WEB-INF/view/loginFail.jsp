@@ -9,7 +9,6 @@
 <br/><br/>
 <center>
 <br/><br/>
-<a href="index.html">홈화면으로</a><br /><br />
 로그인에 실패했습니다.<br/><br/>
 확인하시고 다시 로그인 해주세요.<br/><br/><br/>
 Copyright ⓒ 2011 All rights reserved. <br/>

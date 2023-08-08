@@ -15,7 +15,7 @@
 		String result = "";
 		
 		if ((name==null) || (name.trim().equals(""))){
-			result = "loginFail.html";
+			result = "loginFail.jsp";
 		} else {
 			result = "loginSuccess.jsp";
 		}
