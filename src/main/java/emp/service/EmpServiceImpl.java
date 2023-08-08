@@ -65,6 +65,19 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public EmpDTO login(EmpDTO dto) {
 		System.out.println("login(" + dto.getId() + ") :: count = " + empDAO.getEmpCountById(dto.getId()));
-		return empDAO.getEmp(dto.getId());
+//		EmpDTO result = empDAO.getEmp(dto.getId().trim(), dto.getPwd().trim());	// 원래 login구현
+		EmpDTO result = empDAO.getEmp(dto.getId());
+		
+//		// 방법1
+//		if(dto.getPwd().trim().equals(result.getPwd())) {
+//			return result;
+//		} else {
+//			return null;
+//		}
+		
+		// 방법2
+		EmpDTO returnValue = (dto != null && result != null && (dto.getPwd().trim().equals(result.getPwd()))) ?  result : null;
+		
+		return returnValue;
 	}
 }

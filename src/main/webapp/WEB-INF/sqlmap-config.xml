@@ -6,6 +6,7 @@
 
 	<!-- 쿼리문에 들어있는 xml 지정 -->
 	<sqlMap resource="emp/model/Emp.xml"/>
+	<sqlMap resource="board/model/Board.xml"></sqlMap>
 		
 </sqlMapConfig>
 
