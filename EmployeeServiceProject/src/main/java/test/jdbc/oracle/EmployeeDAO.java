@@ -2,6 +2,7 @@ package test.jdbc.oracle;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -135,6 +136,12 @@ public class EmployeeDAO {
 				+ "phone = '" + emp.getPhone() + "', "
 				+ "email = '" + emp.getEmail() + "' "
 				+ "where id = '" + emp.getId() + "'";
+		
+		// prepare statement 방법
+//		PreparedStatement pstmt = conn.prepareStatement(sql);
+//		pstmt.setString(0, emp.getPwd());
+//		...
+//		pstmt.executeUpdate();
 		
 		int result = stmt.executeUpdate(sql);
 		
