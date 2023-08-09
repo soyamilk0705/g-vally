@@ -28,7 +28,7 @@
 	String name = (String) session.getAttribute("login");		// session은 hashMap으로 구현되어 있어서 for문 안돌리고 찾을 수 있음
 
 	String loginMsg = ((name == null) || (name.trim().equals("")))
-			? "<a href='login.jsp'>로그인</a><a href='login2.jsp'>로그인2</a>" 
+			? "<a href='login.jsp'>로그인</a><a href='login2.jsp'>로그인2</a><a href='login3.jsp'>로그인3</a>" 
 			: "<a href='logout.jsp'>로그아웃</a>직원(" + name + ")이 로그인하셨습니다.<a href='logout2.jsp'>로그아웃2</a>";
 	
 %>

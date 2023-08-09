@@ -12,6 +12,7 @@ public class EmployeeService {
 	
 	private ConnectionPool pool;
 	private EmployeeDAO dao;
+	private EmployeeDTO dto;
 
 	public EmployeeDTO selectByName(String name) throws SQLException {	// jsp에서 static 아닌거 선호(사실 상관 없음)
 		EmployeeDTO emp = dao.selectByName(name);
@@ -101,4 +102,17 @@ public class EmployeeService {
 		this.pool = dao.getConnectionPool();
 //		dao.close();
 	}
+
+	public EmployeeDTO getDto() {
+		return dto;
+	}
+
+	public void setDto(EmployeeDTO dto) {
+		this.dto = dto;
+	}
+	
+	public EmployeeDTO getLogin() throws SQLException{
+		return login(dto);
+	}
+	
 }
