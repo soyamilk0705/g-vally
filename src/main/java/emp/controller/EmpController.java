@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import board.model.BoardDTO;
 import emp.model.EmpDTO;
 import emp.service.EmpService;
 
@@ -30,15 +29,16 @@ public class EmpController {
 	public String login(EmpDTO dto, HttpSession session) {
 		dto = empService.login(dto);
 		
-//		String returnValue = "";
+		String returnValue = "";
 		
 		if (dto == null) {
-			return "loginFail";
+			returnValue = "loginFail";
 		} else {
-//			returnValue = "loginSuccess";
+			returnValue = "loginSuccess";
 			session.setAttribute("login", dto.getName());
-			return "redirect:/list.khs";
 		}
+		
+		return returnValue;
 		
 	}
 	
@@ -48,11 +48,8 @@ public class EmpController {
 	}
 	
 	@RequestMapping("/logout.khs")
-	public String logout(HttpSession session) {
-		session.removeAttribute("login");
-		session.invalidate();
-		
-		return "loginForm";
+	public String logout() {
+		return "logout";
 	}
 	
 	@RequestMapping("/register.khs")

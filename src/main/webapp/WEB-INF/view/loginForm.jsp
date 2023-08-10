@@ -2,9 +2,9 @@
 <%
 	String name = (String) session.getAttribute("login");
 	String result = "";
-
+	
 	if (name == null){
-		result = "";
+		result = "";			// 로그인 안되어 있으면 forward 안함(forward page에 "" 들어가면 아무것도 안함)
 	} else {
 		result = "viewLogin.jsp";
 %>
