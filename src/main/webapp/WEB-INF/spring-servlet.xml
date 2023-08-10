@@ -13,7 +13,6 @@
 
 	<!-- 컨트롤등록 : 자동으로 컨트롤러를 찾는다. -->		<!-- controller 패키지 안에 있는거 controller로 자동으로 등록됨 -->
 	<context:component-scan base-package="emp.controller" />
-	<context:component-scan base-package="board.controller" />
 	
 	<!--/WEB-INF/view/ 안에 있고 확장자가 .jsp 이면 view로 등록  -->
 	<bean id="viewResolver"
