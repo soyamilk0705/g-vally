@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC 
+	"-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+
+	<!-- 쿼리문에 들어있는 xml 지정 -->
+	<!--  -->
+	<sqlMap resource="emp/model/Emp.xml"></sqlMap>	
+	
+	<!-- xml 파일 하나로 합칠 수도 있지만 이런식으로 xml 파일 여러 개 나열 할 수 있음 -->
+	<!-- <sqlMap resource="emp/model/Board.xml"></sqlMap>	 -->
+		
+</sqlMapConfig>
+
+
+
