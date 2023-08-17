@@ -16,22 +16,22 @@ public class TestEmp {
 		// TODO Auto-generated method stub
 		String className = "oracle.jdbc.driver.OracleDriver";		
 
-		// 1. µå¶óÀÌ¹ö ·Îµù ¹× µî·Ï
-		// ÇÁ·ÎÁ§Æ® Build Path - library¿¡ objdbc6 µî·Ï ÇØ¾ßÇÔ (Àß ¸ğ¸£°ÚÀ¸¸é JDBCProject 25¹ø ÁÖ¼® È®ÀÎ) 
-		Class.forName(className);
+		// 1. ë“œë¼ì´ë²„ ë¡œë”© ë° ë“±ë¡
+		// í”„ë¡œì íŠ¸ Build Path - libraryì— objdbc6 ë“±ë¡ í•´ì•¼í•¨ (ì˜ ëª¨ë¥´ê² ìœ¼ë©´ JDBCProject 25ë²ˆ ì£¼ì„ í™•ì¸)  
+		Class.forName(className);		// DriverManagerì— ë“±ë¡ì€ ìë™
 
-		// 2. ¿¬°á ¾ò¾î¿À±â
+		// 2. ì—°ê²° ì–»ì–´ì˜¤ê¸°
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String user = "hr";
 		String password = "hr";
 
 		Connection conn = DriverManager.getConnection(url, user, password);
 								
-		// 3. ¸í·É¹® »ı¼ºÇÏ±â
-		Statement stmt = conn.createStatement();		// DBMS - session »ı¼º (statement ´ÜÀ§·Î ¸¸µé¾îÁü) 
-																			// ¸í·É¾î ÇÏ³ª ´ç °á°ú¹°(ResultSet) ÇÏ³ª¹Û¿¡ ¸ø¸¸µé¾îÁü (stmt:result = 1:1)
+		// 3. ëª…ë ¹ë¬¸ ìƒì„±í•˜ê¸°
+		Statement stmt = conn.createStatement();		// DBMS - session ìƒì„± (statement ë‹¨ìœ„ë¡œ ë§Œë“¤ì–´ì§)  
+																			// ëª…ë ¹ì–´ í•˜ë‚˜ ë‹¹ ê²°ê³¼ë¬¼(ResultSet) í•˜ë‚˜ë°–ì— ëª»ë§Œë“¤ì–´ì§ (stmt:result = 1:1)
 
-		// 4. ¸í·É¹® ½ÇÇàÇÏ±â
+		// 4. ëª…ë ¹ë¬¸ ì‹¤í–‰í•˜ê¸°
 		ArrayList<Employee> listEmp = new ArrayList<Employee>();
 		Employee emp;
 		String result;
@@ -42,36 +42,36 @@ public class TestEmp {
 		
 		// select()
 		Scanner in = new Scanner(System.in);
-		System.out.println("°Ë»öÇÒ Á÷¿ø ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä>");
+		System.out.println("ê²€ìƒ‰í•  ì§ì› ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”>");
 		String name = in.nextLine();
 		emp = selectByName(stmt, name);
 		System.out.println(emp);
 		
 		// insert()
-		result = insert(stmt, in);	// view¸¦ Ã³¸®¿¡ ºÙ¿©¼­ ³Ñ±â´Â ¹æ½ÄÀÌ±â ¶§¹®¿¡ »ç¿ëÀÚ ÀÔ·Â ¹Ş°í µ¥ÀÌÅÍ ÀÚÃ¼¸¦ ³Ñ°ÜÁÖ´Â°Ô ÁÁÀ½, À§¿¡ ¹æ½ÄÀÌ´õ ÁÁÀ½(view-control-storage µû·Î ÇÏ´Â°Ô ÁÁÀ½)
+		result = insert(stmt, in);	// viewë¥¼ ì²˜ë¦¬ì— ë¶™ì—¬ì„œ ë„˜ê¸°ëŠ” ë°©ì‹ì´ê¸° ë•Œë¬¸ì— ì‚¬ìš©ì ì…ë ¥ ë°›ê³  ë°ì´í„° ìì²´ë¥¼ ë„˜ê²¨ì£¼ëŠ”ê²Œ ì¢‹ìŒ, ìœ„ì— ë°©ì‹ì´ë” ì¢‹ìŒ(view-control-storage ë”°ë¡œ í•˜ëŠ”ê²Œ ì¢‹ìŒ)
 		System.out.println(result);
 		
 		// delete()
-		System.out.println("»èÁ¦ÇÒ Á÷¿øÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä>");
+		System.out.println("ì‚­ì œí•  ì§ì›ì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”>");
 		name = in.nextLine();
-		emp = selectByName(stmt, name);			// selectByNameÀº delete ÇÏ±â À§ÇÑ ÀüÃ³¸®·Î ¾²ÀÓ(¾Ë°íÀÖ´Â Á¤º¸·Î ¿øÇÏ´Â Á¤º¸¸¦ Ã£À½)
+		emp = selectByName(stmt, name);			// selectByNameì€ delete í•˜ê¸° ìœ„í•œ ì „ì²˜ë¦¬ë¡œ ì“°ì„(ì•Œê³ ìˆëŠ” ì •ë³´ë¡œ ì›í•˜ëŠ” ì •ë³´ë¥¼ ì°¾ìŒ)
 		System.out.println(emp);
 		result = delete(stmt, emp.getId());		
 		System.out.println(result);
 		
 		// update()
-		System.out.println("¼öÁ¤ÇÒ Á÷¿øÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä>");
+		System.out.println("ìˆ˜ì •í•  ì§ì›ì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”>");
 		name = in.nextLine();
 		emp = selectByName(stmt, name);
 		System.out.println(emp);
 		result = update(stmt, in, emp.getId());
 		System.out.println(result);
 		
-		
-		
+		// 6. ì—°ê²° í•´ì œ : close()
 		stmt.close();
 		conn.close();
 		in.close();
+		
 	}
 	
 	
@@ -113,62 +113,64 @@ public class TestEmp {
 		String returnResult;
 		String name, id, pwd, phone, email;
 		
-		System.out.println("Á÷¿øÀ» Ãß°¡ÇÕ´Ï´Ù.");
-		System.out.println("Á÷¿ø¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä>");
+		System.out.println("ì§ì›ì„ ì¶”ê°€í•©ë‹ˆë‹¤.");
+		System.out.println("ì§ì›ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”>");
 		id = in.nextLine();
-		System.out.println("Á÷¿øÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä>");
+		System.out.println("ì§ì›ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”>");
 		name = in.nextLine();
-		System.out.println("ÃÊ±âºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä>");
+		System.out.println("ì´ˆê¸°ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”>");
 		pwd = in.nextLine();
-		System.out.println("Á÷¿ø ÈŞ´ëÆù ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä>");
+		System.out.println("ì§ì› íœ´ëŒ€í° ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”>");
 		phone = in.nextLine();
-		System.out.println("Á÷¿ø ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä>");
+		System.out.println("ì§ì› ì´ë©”ì¼ì„ ì…ë ¥í•˜ì„¸ìš”>");
 		email = in.nextLine();
 		
+		// NEXTVAL : increment
+		// CURRVAL : ìµœì´ˆë¡œ ë§Œë“¤ì–´ì§€ë§Œ ì‚¬ìš© ë¶ˆê°€ (ê·¸ë˜ì„œ NEXTVAL ì‚¬ìš© í›„ CURRVAL ì‚¬ìš©í•¨)
 		String sql = "insert into EmpTBL (seq, id, pwd, name, phone, email, hireDT)\n"
 				+ " values (seq_EmpTBL.NEXTVAL, '"+ id +"', '"+ pwd +"', '"+ name +"', '"+ phone +"', '"+ email + "', sysdate)";
-		int result  = stmt.executeUpdate(sql);	// insert, delete, update ½ÇÇà ½Ã »ç¿ë
+		int result  = stmt.executeUpdate(sql);	// insert, delete, update ì—ì„  executeUpdate ì‚¬ìš©
 		Employee emp;
 		
-		if (result == 1) {	// ¼º°ø
+		if (result == 1) {	// ì„±ê³µ
 			emp = selectByName(stmt, name);
 			if (emp.getId().equals(id)) {
-				returnResult = "Á÷¿øÁ¤º¸°¡ Á¤»óÀûÀ¸·Î ÀÔ·ÂµÇ¾ú½À´Ï´Ù.";
+				returnResult = "ì§ì›ì •ë³´ê°€ ì •ìƒì ìœ¼ë¡œ ì…ë ¥ë˜ì—ˆìŠµë‹ˆë‹¤.";
 			} else {
-				returnResult = "Á÷¿øÁ¤º¸°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù. \n ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+				returnResult = "ì§ì›ì •ë³´ê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤. \n ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.";
 			}
-		} else {	// ½ÇÆĞ : return 0
-			returnResult = "Á÷¿øÁ¤º¸°¡ µî·ÏµÇÁö ¾Ê¾Ò½À´Ï´Ù. \n ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+		} else {	// ì‹¤íŒ¨ : return 0
+			returnResult = "ì§ì›ì •ë³´ê°€ ë“±ë¡ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤. \n ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.";
 		}
-
+		
 		return returnResult;
 	}
 	
 	/**
-	 * TODO °úÁ¦1
-	 * update º¹½À & delete Àû¿ë, °í¹Î(insert, selectµµ Àû¿ë ¿©ºÎ)
+	 * TODO ê³¼ì œ1
+	 * update ë³µìŠµ & delete ì ìš©, ê³ ë¯¼(insert, selectë„ ì ìš© ì—¬ë¶€)
 	 * 
 	 */
 	private static String update(Statement stmt,  Scanner in, String id) throws SQLException {
-		Connection conn = stmt.getConnection();		// stmt¿¡¼­ getConnection()À» Çß±â ¶§¹®¿¡ close ÇÏ¸é ¾ÈµÊ
-																			// (À§¿¡¼­ manager¿¡¼­ connectionÀ» ÇÏ°í ±× connectionÀ¸·Î stmt¸¦ ¸¸µê
-																			// ±× stmt¿¡ connectionÀ» ¹Ş¾Æ¿Â °Í »Ó »õ·Î connectionÀ» ¸¸µç°Ô ¾Æ´Ô)
-		conn.setAutoCommit(false);	// update ½Ã unique °ªÀ¸·Î ÁÖÁö ¾ÊÀº ¹®Á¦ »ı±è -> ±Ùµ¥ ÀÌ¹Ì Äõ¸®¸¦ ³¯·Á¼­ ÀÌ¹Ì µ¥ÀÌÅÍ´Â ¹Ù²ñ 
-													// -> ÀÌ·¯ÇÑ ¹®Á¦¸¦ ÇØ°áÇÏ±â À§ÇØ auto commit ²û
+		Connection conn = stmt.getConnection();		// stmtì—ì„œ getConnection()ì„ í–ˆê¸° ë•Œë¬¸ì— close í•˜ë©´ ì•ˆë¨
+																			// (ìœ„ì—ì„œ managerì—ì„œ connectionì„ í•˜ê³  ê·¸ connectionìœ¼ë¡œ stmtë¥¼ ë§Œë“¦
+																			// ê·¸ stmtì— connectionì„ ë°›ì•„ì˜¨ ê²ƒ ë¿ ìƒˆë¡œ connectionì„ ë§Œë“ ê²Œ ì•„ë‹˜)
+		conn.setAutoCommit(false);	// update ì‹œ unique ê°’ìœ¼ë¡œ ì£¼ì§€ ì•Šì€ ë¬¸ì œ ìƒê¹€ -> ê·¼ë° ì´ë¯¸ ì¿¼ë¦¬ë¥¼ ë‚ ë ¤ì„œ ì´ë¯¸ ë°ì´í„°ëŠ” ë°”ë€œ 
+													// -> ì´ëŸ¬í•œ ë¬¸ì œë¥¼ í•´ê²°í•˜ê¸° ìœ„í•´ auto commit ë”
 		
 		Employee emp;
 		String returnResult;
 		String newName, newPwd, newPhone, newEmail;
 		
 		emp = selectById(stmt, id);
-		System.out.println(emp.getName() + "ÀÇ Á¤º¸\n" + emp + "\n");
-		System.out.println("[" + emp.getName() + "] : º¯°æÇÒ ÀÌ¸§(ºÒÇÊ¿ä½Ã ¿£ÅÍ)>");
+		System.out.println(emp.getName() + "ì˜ ì •ë³´\n" + emp + "\n");
+		System.out.println("[" + emp.getName() + "] : ë³€ê²½í•  ì´ë¦„(ë¶ˆí•„ìš”ì‹œ ì—”í„°)>");
 		newName = in.nextLine();
-		System.out.println("[" + emp.getPwd() + "] : º¯°æÇÒ ºñ¹Ğ¹øÈ£(ºÒÇÊ¿ä½Ã ¿£ÅÍ)>");
+		System.out.println("[" + emp.getPwd() + "] : ë³€ê²½í•  ë¹„ë°€ë²ˆí˜¸(ë¶ˆí•„ìš”ì‹œ ì—”í„°)>");
 		newPwd = in.nextLine();
-		System.out.println("[" + emp.getPhone() + "] : º¯°æÇÒ ÈŞ´ëÆù ¹øÈ£(ºÒÇÊ¿ä½Ã ¿£ÅÍ)>");
+		System.out.println("[" + emp.getPhone() + "] : ë³€ê²½í•  íœ´ëŒ€í° ë²ˆí˜¸(ë¶ˆí•„ìš”ì‹œ ì—”í„°)>");
 		newPhone = in.nextLine();
-		System.out.println("[" + emp.getEmail() + "] : º¯°æÇÒ ÀÌ¸ŞÀÏ(ºÒÇÊ¿ä½Ã ¿£ÅÍ)>");
+		System.out.println("[" + emp.getEmail() + "] : ë³€ê²½í•  ì´ë©”ì¼(ë¶ˆí•„ìš”ì‹œ ì—”í„°)>");
 		newEmail = in.nextLine();
 
 		String sql = "update EmpTBL set pwd = '" + (!newPwd.equals("")?newPwd:emp.getPwd()) + "', "
@@ -180,23 +182,24 @@ public class TestEmp {
 		
 		if (result == 1) {
 			emp = selectById(stmt, id);
-			returnResult = emp.getName() + "ÀÇ Á¤º¸°¡ Á¤»óÀûÀ¸·Î ¼öÁ¤µÇ¾ú½À´Ï´Ù.\n" + emp + "\n";
+			returnResult = emp.getName() + "ì˜ ì •ë³´ê°€ ì •ìƒì ìœ¼ë¡œ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.\n" + emp + "\n";
 			conn.commit();
 		} else if(result == 0) {
-			returnResult = emp.getName() + "ÀÇ Á¤º¸°¡ Á¤»óÀûÀ¸·Î ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.\n" + emp + "\n¼öÁ¤ÇÒ Á¤º¸¸¦ ´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä.";
+			returnResult = emp.getName() + "ì˜ ì •ë³´ê°€ ì •ìƒì ìœ¼ë¡œ ìˆ˜ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n" + emp + "\nìˆ˜ì •í•  ì •ë³´ë¥¼ ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”.";
 			conn.rollback();
-		} else {	// °°Àº id°¡ ¿©·¯¸í
-			returnResult = emp.getId() +  "ÀÇ µ¥ÀÌÅÍ°¡ 2°³ ÀÌ»óÀÔ´Ï´Ù. µû¶ó¼­ ÀÔ·ÂÇÑ Á¤º¸°¡ ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù."
-					+ "\n °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇÏ¼¼¿ä.";
+		} else {	// ê°™ì€ idê°€ ì—¬ëŸ¬ëª…
+			returnResult = emp.getId() +  "ì˜ ë°ì´í„°ê°€ 2ê°œ ì´ìƒì…ë‹ˆë‹¤. ë”°ë¼ì„œ ì…ë ¥í•œ ì •ë³´ê°€ ìˆ˜ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤."
+					+ "\n ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•˜ì„¸ìš”.";
 			conn.rollback();
 		}
 		
 		conn.setAutoCommit(true);
 		return returnResult;
 	}
+
 	
 	private static String delete(Statement stmt, String id) throws SQLException {
-		Connection conn = stmt.getConnection(); // »õ·Î ¿¬°áÇÏ´Â °ÍÀÌ ¾Æ´Ï¶ó stmt¿¡¼­ ÀÚ±â¸¦ ¸¸µç connÀ» Ã£¾Æ¿À´Â °Í
+		Connection conn = stmt.getConnection(); // ìƒˆë¡œ ì—°ê²°í•˜ëŠ” ê²ƒì´ ì•„ë‹ˆë¼ stmtì—ì„œ ìê¸°ë¥¼ ë§Œë“  connì„ ì°¾ì•„ì˜¤ëŠ” ê²ƒ
 		conn.setAutoCommit(false);
 		
 		Employee emp;
@@ -205,24 +208,24 @@ public class TestEmp {
 		String sql = "delete from EmpTBL where id = '" + id + "'";
 		int result = stmt.executeUpdate(sql);
 		
-		// ¹Ø¿¡ else µÎ°³ Áßº¹µÈ °Å »¬ ¼ö ÀÖÀ½(selectById ¹ÛÀ¸·Î »©¸é µÊ)
-		if(result == 1) {			// switch ¹®À¸·Îµµ ÀÛ¼º°¡´É (°¡µ¶¼º ÁÁÀ½), if ¹®À¸·Î ÀÛ¼ºÇÏ¸é ¼º´ÉÀÌ ÁÁÀ½(º¸Åë 0ÀÌ³ª 1·Î result °¡ ¸¹ÀÌ ³ª¿À´Ï±î) 
-			emp = selectById(stmt, id);		// ÁøÂ¥ »èÁ¦µÇ¾ú´ÂÁö °ËÁõ
+		// ë°‘ì— else ë‘ê°œ ì¤‘ë³µëœ ê±° ëº„ ìˆ˜ ìˆìŒ(selectById ë°–ìœ¼ë¡œ ë¹¼ë©´ ë¨)
+		if(result == 1) {			// switch ë¬¸ìœ¼ë¡œë„ ì‘ì„±ê°€ëŠ¥ (ê°€ë…ì„± ì¢‹ìŒ), if ë¬¸ìœ¼ë¡œ ì‘ì„±í•˜ë©´ ì„±ëŠ¥ì´ ì¢‹ìŒ(ë³´í†µ 0ì´ë‚˜ 1ë¡œ result ê°€ ë§ì´ ë‚˜ì˜¤ë‹ˆê¹Œ) 
+			emp = selectById(stmt, id);		// ì§„ì§œ ì‚­ì œë˜ì—ˆëŠ”ì§€ ê²€ì¦
 			
 			if (emp == null) {
-				returnResult = "ID : " + id + "ÀÇ Á÷¿øÁ¤º¸ " + result + "°³°¡ »èÁ¦µÇ¾ú½À´Ï´Ù.";
+				returnResult = "ID : " + id + "ì˜ ì§ì›ì •ë³´ " + result + "ê°œê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.";
 				conn.commit();
-			} else {	// »èÁ¦µÈ Á÷¿øÁ¤º¸¿Í °°Àº ¾ÆÀÌµğ°¡ Á¸ÀçÇÏ´Â °æ¿ì
-				returnResult = "Á÷¿øÁ¤º¸°¡ »èÁ¦µÇÁö ¾Ê¾Ò½À´Ï´Ù.\nID : " + id + "°¡ Áßº¹µÇ¾ú½À´Ï´Ù."
-						+ "È®ÀÎÇØÁÖ¼¼¿ä.";
+			} else {	// ì‚­ì œëœ ì§ì›ì •ë³´ì™€ ê°™ì€ ì•„ì´ë””ê°€ ì¡´ì¬í•˜ëŠ” ê²½ìš°
+				returnResult = "ì§ì›ì •ë³´ê°€ ì‚­ì œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\nID : " + id + "ê°€ ì¤‘ë³µë˜ì—ˆìŠµë‹ˆë‹¤."
+						+ "í™•ì¸í•´ì£¼ì„¸ìš”.";
 				conn.rollback();
 			}
-		} else if (result == 0) {	// »èÁ¦µÇÁö ¾ÊÀº °æ¿ì
-				returnResult = "Á÷¿øÁ¤º¸°¡ »èÁ¦µÇÁö ¾Ê¾Ò½À´Ï´Ù.\nID : " + id + "¸¦ È®ÀÎÇØÁÖ¼¼¿ä.";
-		} else { // »èÁ¦ÇÏ·Á´Â Á÷¿øÁ¤º¸¿Í °°Àº ¾ÆÀÌµğ°¡ 2°³ ÀÌ»ó Á¸ÀçÇÏ´Â °æ¿ì
-				returnResult = "Á÷¿øÁ¤º¸°¡ »èÁ¦µÇÁö ¾Ê¾Ò½À´Ï´Ù.\nID : " + id + "°¡ Áßº¹µÇ¾ú½À´Ï´Ù."
-						+ "È®ÀÎÇØÁÖ¼¼¿ä.";
-				conn.rollback();			// ¿©·¯ °³°¡ Áö¿öÁø »óÅÂÀÌ±â ¶§¹®¿¡ rollback ÇØ¾ßÇÔ
+		} else if (result == 0) {	// ì‚­ì œë˜ì§€ ì•Šì€ ê²½ìš°
+				returnResult = "ì§ì›ì •ë³´ê°€ ì‚­ì œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\nID : " + id + "ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.";
+		} else { // ì‚­ì œí•˜ë ¤ëŠ” ì§ì›ì •ë³´ì™€ ê°™ì€ ì•„ì´ë””ê°€ 2ê°œ ì´ìƒ ì¡´ì¬í•˜ëŠ” ê²½ìš°
+				returnResult = "ì§ì›ì •ë³´ê°€ ì‚­ì œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\nID : " + id + "ê°€ ì¤‘ë³µë˜ì—ˆìŠµë‹ˆë‹¤."
+						+ "í™•ì¸í•´ì£¼ì„¸ìš”.";
+				conn.rollback();			// ì—¬ëŸ¬ ê°œê°€ ì§€ì›Œì§„ ìƒíƒœì´ê¸° ë•Œë¬¸ì— rollback í•´ì•¼í•¨
 		}
 		
 		conn.setAutoCommit(true);
