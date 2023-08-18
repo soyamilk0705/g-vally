@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<center><h2>회원가입</h2></center>
+	<table>
+		<form name="register">
+			<tr>
+				<td>ID:</td>
+				<td><input name='id' type="text"></td>
+			</tr>
+			<tr>
+				<td>이름:</td>
+				<td><input name='name' type="text"></td>
+			</tr>
+			<tr>
+				<td>암호:</td>
+				<td><input name='password' type='password'></td>
+			</tr>
+			<tr>
+				<td>주소:</td>
+				<td><input name='addr' type='text'></td>
+			</tr>
+			<tr>
+				<td>전화번호:</td>
+				<td><input name='phone' type='text'></td>
+			</tr>
+			<tr>
+				<td>본인확인 힌트:</td>
+				<td>
+					<select name='hint'>
+						<option value='1'>태어난 고향은?</option>
+						<option value='2'>출신 초등학교는?</option>
+						<option value='3'>배우자의 이름은?</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>본인확인 답변:</td>
+				<td><input name='answerHint' type='text'></td>
+			</tr>
+			<tr>
+				<td>결혼여부:</td>
+				<td>
+					<input name='couple' type='radio' value='y'>기혼
+					<input name='couple' type='radio' value='n'>미혼
+				</td>
+			</tr>
+			<tr>
+				<td>취미:</td>
+				<td>
+					<input name='hobby' type='checkbox' value='1'>컴퓨터
+					<input name='hobby' type='checkbox' value='2'>문화
+					<input name='hobby' type='checkbox' value='3'>스포츠
+					<input name='hobby' type='checkbox' value='4'>기타
+				</td>
+			</tr>
+			<tr>
+				<td>비고:</td>
+				<td><textarea name='id' width=12 height=40></textarea></td>
+			</tr>
+			<tr>
+				<td colspan='2' align='center'>
+					<input type='button' value='작성완료'>&nbsp;
+					<input type='reset' value='다시쓰기'>
+				</td>
+			</tr>
+		</form>
+		
+	
+	</table>
+</body>
+</html>
