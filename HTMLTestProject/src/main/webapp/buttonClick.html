@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function compute(f) {
+		if (confirm("Are you sure ? [" + f.expr.value + "]")) {
+			f.result.value = eval(f.expr.value);
+		} else {
+			alert("Please come back again");
+		}
+	}
+	
+	function cleanForm(f) {
+		f.expr.value = " ";
+		f.result.value = " ";
+	}
+	
+	function createWindow(){
+		new_window = window.open("test.html", "newWindow",
+				"toolbar=no, width=200, height=200, directories=no, status=no, scrollbars=yes, resize=no");
+	}
+	
+	
+</script>
+</head>
+<body>
+	<form>
+		<input type="text" name="expr" size=20>
+		<input type="button" value="계산" onClick="compute(this.form)">
+		<input type="button" value="지우기" onClick="cleanForm(this.form)">
+		<br>
+		결과: <input type="text" name="result" size=20>
+	</form>
+	
+	<input type="button" value="create Window" onclick="createWindow()">
+</body>
+</html>
