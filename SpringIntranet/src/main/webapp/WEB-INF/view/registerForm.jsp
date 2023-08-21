@@ -3,10 +3,20 @@
 <head>
     <title>회원등록</title>
     <meta charset="UTF-8">
+    <script>
+		function checkRegister(s){
+			if(s.id.value == "" || s.pwd.value == "" || s.name.value == ""){
+				alert("가입정보를 정확히 입력해주세요.");
+				return false;
+			} else{
+				return true;
+			}
+		}
+	</script>
 </head>
 <body>
     <center>
-    <form name="enrollForm" action="registerAction.khs" method="post">
+    <form name="enrollForm" action="registerAction.khs" method="post" onsubmit="return checkRegister(this);">
     <table border="0" width="500">
         <tr>
             <th colspan="2"></th>

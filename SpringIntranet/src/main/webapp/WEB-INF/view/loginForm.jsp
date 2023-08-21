@@ -13,17 +13,26 @@
 	}
 %>
 
-
 <html>
 	<head>
 		<title>사내 인트라넷 시스템</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 		<meta http-equiv="Cache-Control" content="no-cache; no-store; no-save">
+		<script>
+			function checkLogin(s){
+				if(s.id.value == "" || s.pwd.value == ""){
+					alert("아이디나 비밀번호를 입력해주세요." );
+					return false;
+				} else{
+					return true;
+				}
+			}
+		</script>
 	</head>
 	<body bgcolor="#fffffe">
 	<br/><br/>
 	<center>
-	<form name="frmLogin" action="loginAction.khs" method="post">
+	<form name="frmLogin" action="loginAction.khs" method="post" onsubmit="return checkLogin(this);">
 	<table border="0" cellpadding="4" cellspacing="1">
 		<tr bgcolor=#eeeeff>
 			<td bgcolor="#eeeeff" width="150" align="right">사용자 아이디</td>
