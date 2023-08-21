@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function go(url){
+		alert("url : " + url)
+		opener.location = url;
+	}
+	
+	
+</script>
+</head>
+<body>
+	<h3>URL</h3>
+	<form action="">
+		<input type="url" name="url" value="http://"
+			onkeydown="if (window.event.keyCode == 13) go(this.form.url.value);">
+		<input type="button" value="GO!" onclick="go(this.form.url.value)">
+	</form>
+</body>
+</html>
