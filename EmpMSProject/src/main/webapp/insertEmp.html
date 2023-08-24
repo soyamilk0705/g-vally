@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>회원등록</title>
+    <meta charset="UTF-8">
+    <script>
+		function checkRegister(s){
+			if(s.empNum.value == ""){
+				alert("사번을 입력해주세요.");
+				s.empNum.focus();
+			} else if (s.name.value == ""){
+				alert("이름을 입력해주세요.");
+				s.name.focus();
+			} else if (s.pwd.value == ""){
+				alert("비밀번호를 입력해주세요.");
+				s.pwd.focus();
+			} else if (s.hobby.value == "") {
+				alert("비밀번호를 입력해주세요.");
+				s.pwd.focus();
+			}else{
+				return true;
+			}
+			return false;
+		}
+	</script>
+</head>
+<body>
+    <center>
+    <form name="enrollForm" action="" method="post" onsubmit="return checkRegister(this);">
+    <table border="0" width="500">
+        <tr>
+            <th colspan="2"></th>
+        </tr>
+        <tr>
+            <th colspan="2">회원 가입</th>
+        </tr>
+        <tr>
+            <td width="130" align="right">
+                <b>사번 :</b>&nbsp;
+            </td>
+            <td>
+                <input type="text" name="empNum" size="30" maxlength="12">
+            </td>
+        </tr>
+        <tr> 
+            <td width="130" align="right"> 
+                <b>이름 :</b>&nbsp;
+            </td>
+            <td> 
+                <input type="text" name="name" size="30" maxlength="20">
+            </td>
+        </tr>
+        <tr> 
+            <td width="130" align="right">
+                <b>비밀번호 :</b>&nbsp;
+            </td>
+            <td>
+                <input type="password" name="pwd" size="31" maxlength="8">  
+            </td>
+        </tr>
+        <tr> 
+            <td width="130" align="right">
+                <b>직위 :</b>&nbsp;
+            </td>
+            <td>
+            	<select name="role">
+            		<option value="이사">이사</option>
+            		<option value="부장">부장</option>
+            		<option value="차장">차장</option>
+            		<option value="과장">과장</option>
+            		<option value="대리">대리</option>
+            		<option value="사원">사원</option>
+            	</select>
+            </td>
+        </tr>
+        <tr> 
+            <td width="130" align="right">
+                <b>취미 :</b>&nbsp;
+            </td>
+            <td>
+            	<input type="checkbox" name="hobby" value="문화">문화
+            	<input type="checkbox" name="hobby" value="스포츠">스포츠
+            	<input type="checkbox" name="hobby" value="기타">기타
+            </td>
+        </tr>
+        <tr> 
+            <td width="130" align="right">
+                <b>비고 :</b>&nbsp;
+            </td>
+            <td>
+                <textarea name="comment" rows=3 cols=24></textarea>  
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan=2 align="center">
+                <input type="submit" value="작성완료">
+                <input type="reset" value="취소">
+            </td>
+        </tr>
+    </table>
+    </form>
+    </center>
+</body>
+</html>
+

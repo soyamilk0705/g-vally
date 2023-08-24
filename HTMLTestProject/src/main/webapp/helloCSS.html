@@ -1,0 +1,110 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- <meta http-equiv="refresh" content="3; url=register.html"> --> <!-- 3초 이후에 register.html 로 이동 -->
+<title>Hello_안녕하세요</title>
+</head>
+<body>
+	<h1>큰 제목</h1>
+	<h3>중간 제목</h3><a href='#desc'>내용 찾기</a>
+	<h5>작은 제목</h5>
+	<strong>본문(body)</strong>
+	
+	<!-- HTML5는 basefont 나 font가 적용되지 않음 :: css에서 처리하면 됨 -->
+	<basefont size=3 color=#000000 face='Times Roman'></br>	<!-- (Lucida, Sans, Times, Roman 등)글꼴 지정 -->
+	<font size=3 color=#000000 face='sans sherif'><b>"sans sherif"</b> 글꼴 적용한 본문(body)</font></br>
+	<font size=5 color=#000000 face='맑은 고딕'><em>"맑은 고딕"</em> 글꼴 적용한 본문2(body2)</font></br>
+	<font size=7 color=#000000 face='Verdana'><em>"Verdana"</em> 글꼴 적용한 본문3(body3)</font></br>
+	본문2(body2)	</br>
+	
+	<img src='test01.jpg' width='400' height='300' border=0 hshape=0 alt="이미지입니다.">
+	<img src='test01.jpg' width='400' height='300' border=0 hshape=0>
+	
+	<table boarder='0' cellpadding='0' cellspacing='0'>
+		<tr>
+			<td><img src='test01.jpg' width='400' height='300'></td>
+			<td><img src='test01.jpg' width='400' height='300'></td>
+		</tr>
+	</table>
+	
+	
+	<p>
+	<a name="desc">원본 :: 찾을 곳</a>
+	
+	<ul>
+		<li type='disk'>1. 안녕하세요</li>
+		<li>2. 안녕하세요</li>
+	</ul>
+	<ol start='3'>
+		<li type='1' value='3'>안녕하세요</li>
+		<li>안녕하세요</li>
+	</ol>
+	<dl>
+		<dt>안녕하세요</dt>
+		<dd>안녕하세요</dd>
+	</dl>
+	<ol>
+		<li value='5'>안녕하세요</li>
+	</ol>
+	<ul>
+		<li type='disk'>1. 안녕하세요</li>
+		<li>2. 안녕하세요</li>
+	</ul>
+	<ol start='3'>
+		<li type='1' value='3'>안녕하세요</li>
+		<li>안녕하세요</li>
+	</ol>
+	<dl>
+		<dt>안녕하세요</dt>
+		<dd>안녕하세요</dd>
+	</dl>
+	<ol>
+		<li value='5'>안녕하세요</li>
+	</ol>
+	<ul>
+		<li type='disk'>1. 안녕하세요</li>
+		<li>2. 안녕하세요</li>
+	</ul>
+	<ol start='3'>
+		<li type='1' value='3'>안녕하세요</li>
+		<li>안녕하세요</li>
+	</ol>
+	<dl>
+		<dt>안녕하세요</dt>
+		<dd>안녕하세요</dd>
+	</dl>
+	<ol>
+		<li value='5'>안녕하세요</li>
+	</ol>
+	
+	<form name="formLogin" action="loginAction.jsp" method="get">
+	<table border="0" cellpadding="4" cellspacing="1">
+		<tr bgcolor=#eeeeff>
+			<td bgcolor="#eeeeff" width="150" align="right">사용자 아이디</td>
+		   	<td bgcolor="#feeeff"><input type=text name=id size=20 maxlength=20 ></td>
+	    </tr>
+	    <tr>
+		    <td bgcolor="#eeeeff" width="150" align="right">패스워드</td>
+		    <td bgcolor="#feeeff"><input type=password name=pwd size=20 maxlength=20 ></td>
+	    </tr>
+	    <tr>
+	        <td colspan="2" align="center">
+	            <br/>
+	        	<input type="submit" value="로 그 인"> 
+	    	    <input type="reset" value="다시쓰기">
+	    	</td>
+	    </tr>
+	</table>
+	</form>
+	
+	<img  src="test02.jpg" usemap="#map1">
+	
+	<map name="map1">
+		<area id=a1" href="chatt.jsp" shape="rect" coords="108,213,288,382" alt="chatt.jsp">
+		<area id=a2" href="register.html" shape="rect" coords="455,217599,339" alt="register.html">
+	</map>
+	
+	
+</body>
+</html>
