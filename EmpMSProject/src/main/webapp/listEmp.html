@@ -3,40 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	h2 {
+		color:red;
+		text-align: center;
+	}
+</style>
+<script type="text/javascript" src="common.js"></script>
 </head>
 <body>
 	<center>
-		<h3>직원 정보 조회</h2>
-		<table border=1 style="border-style: solid;">
+	<h2>직원 정보 조회</h2>
+		<table border="1" cellpadding="10" cellspacing="0">	
 			<tr>
 				<th>사번</th>
 				<th>이름</th>
 				<th>직위</th>
 				<th>전화번호</th>
+				<th>삭제</th>
 			</tr>
 			<tr>
 				<td><a href="viewEmp.html">201101</a></td>
 				<td>김이문</td>
 				<td>부장</td>
 				<td>010-111-1111</td>
+				<td><a href="goDelete('0002')">삭제</a></td>
 			</tr>
 			<tr>
 				<td><a href="viewEmp.html">201101</a></td>
 				<td>김이문</td>
 				<td>부장</td>
 				<td>010-111-1111</td>
+				<td><a href="goDelete('0002')">삭제</a></td>
 			</tr>
 			<tr>
 				<td><a href="viewEmp.html">201101</a></td>
 				<td>김이문</td>
 				<td>부장</td>
 				<td>010-111-1111</td>
-			</tr>
-			<tr>
-				<td><a href="viewEmp.html">201101</a></td>
-				<td>김이문</td>
-				<td>부장</td>
-				<td>010-111-1111</td>
+				<td><a href="goDelete('0002')">삭제</a></td>
 			</tr>
 		</table>
 	</center>
