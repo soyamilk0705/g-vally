@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//Controller를 상속또는 implements를 앋고 POJO방식으로 작성
+//Controller를 상속또는 implements를 하고 POJO방식으로 작성
 
 @Controller
 public class BoardController {

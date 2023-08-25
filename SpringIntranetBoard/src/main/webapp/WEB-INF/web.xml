@@ -6,10 +6,15 @@
     <welcome-file>index.khs</welcome-file>
   </welcome-file-list>
 
-  <error-page>
-  	<error-code>500</error-code>
-  	<location>/index.khs</location>
-  </error-page>
+	<error-page>	<!-- 스프링에선 에러 페이지를 view 쪽으로 보내야함 -->
+	  	<error-code>404</error-code>
+	  	<location>/WEB-INF/view/loginFail.jsp</location>
+  	</error-page>
+
+  	<error-page>	<!-- 스프링에선 에러 페이지를 view 쪽으로 보내야함 -->
+	  	<error-code>500</error-code>
+	  	<location>/WEB-INF/view/index.jsp</location>
+  	</error-page>
    
   <servlet>
   	<servlet-name>spring</servlet-name>

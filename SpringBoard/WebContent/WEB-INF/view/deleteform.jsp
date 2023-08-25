@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,10 +8,10 @@
 <title>글삭제</title>
 <script type="text/javascript">
 	function deletepro(){
-		if(document.f.pwd.value ==""){
-			alert("비밀번호를 입력해주세요!");
+		if (document.f.pwd.value == ""){
+			alert("비밀번호를 입력해주세요.");
 			document.f.pwd.focus();
-		}else{
+		} else {
 			document.f.submit();
 		}
 	}
