@@ -6,26 +6,54 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 쓰기</title>
 <script type="text/javascript">
-	function board_write(){
-		//alert("쓰기")	;
-		if(document.writeform.name.value==""){
-			alert("이름을 입력해주세요");
-		}else if(document.writeform.pwd.value==""){
-			alert("비밀번호을 입력해주세요");
-			document.writeform.pwd.focus();
-		}else if(document.writeform.email.value==""){
-			alert("이메일을 입력해주세요");
-			document.writeform.email.focus();
-		}else if(document.writeform.subject.value==""){
-			alert("제목을 입력해주세요");
-			document.writeform.subject.focus();
-		}else if(document.writeform.content.value==""){
-			alert("내용을 입력해주세요");
-			document.writeform.content.focus();
-		}else{
-			document.writeform.submit(); //전송
+	function board_write(){	
+		if (this.writeform.name.value == ""){
+			alert("이름을 입력해주세요.");
+			this.writeform.name.focus();
+		} else if(this.writeform.pwd.value == ""){
+			alert("비밀번호를 입력해주세요.");
+			this.writeform.pwd.focus();
+		} else if(this.writeform.email.value == "") {
+			alert("이메일을 입력해주세요.");
+			this.writeform.email.focus();
+		} else if(this.writeform.subject.value == "") {
+			alert("제목를 입력해주세요.");
+			this.writeform.subject.focus();
+		} else if(this.writeform.content.value == "") {
+			alert("내용을 입력해주세요.");
+			this.writeform.content.focus();
+		} else {
+			// document.writeform.submit();
+			return true;
 		}
-	}
+		
+		return false;
+	} 
+	
+	 function board_write(writeform){
+		alert(writeform.name.value);
+		if (writeform.name.value == ""){
+			alert("이름을 입력해주세요.");
+			writeform.name.focus();
+		} else if(writeform.pwd.value == ""){
+			alert("비밀번호를 입력해주세요.");
+			writeform.pwd.focus();
+		} else if(writeform.email.value == "") {
+			alert("이메일을 입력해주세요.");
+			writeform.email.focus();
+		} else if(writeform.subject.value == "") {
+			alert("제목를 입력해주세요.");
+			writeform.subject.focus();
+		} else if(writeform.content.value == "") {
+			alert("내용을 입력해주세요.");
+			writeform.content.focus();
+		} else {
+			//writeform.submit();
+			return true;
+		}
+		return false;
+
+	}  
 </script>
 <style type="text/css">
 	th {text-align: right; background: orange}
@@ -36,7 +64,7 @@
 <body>
 <h1>글 쓰기</h1>
 <a href="list.htm">리스트</a>
-<form name = "writeform" action="write.htm" method="post">
+<form name = "writeform" action="write.htm" method="post" onsubmit="return board_write(this)">
 <table width="600">
 	<tr>
 		<th>이름</th>
@@ -51,6 +79,7 @@
 			<input type="password" name="pwd" maxlength="12"  size="13"/>
 		</td>
 	</tr>
+	
 	<tr>
 		<th>이메일</th>
 		<td>
@@ -74,7 +103,7 @@
 	<tr>
 		
 		<td colspan="2">
-			<input type="button" value="쓰기" onclick="board_write()"/>
+			<input type="submit" value="쓰기"/>	<!-- board_write(this.writeform) -->
 			<input type="reset" value="취소" />
 		</td>
 	</tr>
