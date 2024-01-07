@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC 
+	"-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+ 
+ <cacheModel type="LRU" id="guestCashe">
+ 	<flushInterval hours="24"/>
+ 	<flushOnExecute statement="insertGuest"/>
+ 	<property name="size" value="10"/>
+ </cacheModel>
+ 
+ 
+ <!-- typeAlias : 해당 클래스에 별명 지정  -->
+  <typeAlias alias="emp" type="empms.model.EmpDTO" />
+ 
+<insert id="insertEmp" parameterClass="emp">
+	INSERT INTO EmpTBL01 (ID, NAME, PWD, POSITION, TEL, HOBBY, ETC)
+	VALUES (#id#, #name#, #pwd#, #position#, #tel#, #hobby#, #etc#)
+ </insert> 
+
+ 
+ <resultMap class="emp" id="empResult">
+   	<result property="id" column="ID" />  	
+	<result property="name" column="NAME" />  	
+	<result property="pwd" column="PWD" />  	
+	<result property="position" column="POSITION" /> 
+	<result property="tel" column="TEL" />
+	<result property="hobby" column="HOBBY" />
+	<result property="etc" column="ETC" /> 	
+ </resultMap>	
+ 
+ <!-- ROWNUM, where 조건이 있을 경우 sql의 일부를 선택하여 동작 -->
+ <select id="getEmpList" parameterClass="hashmap" resultMap="empResult">	
+ 	select * from EmpTBL01
+ </select> 
+
+ 
+<select id="getEmp" parameterClass="int" resultClass="emp">	
+ 	select * from EmpTBL01 where ID = #id#
+ </select>  
+ 
+ 
+<select id="getEmpById" parameterClass="String" resultClass="emp">	
+ 	select * from EmpTBL01 where ID = #id#
+ </select>
+ 
+<update id = "updateEmp" parameterClass="emp">
+	update EmpTBL01
+	set ID=#id#, PWD=#pwd#, NAME=#name#, POSITION=#position#, TEL=#tel#, HOBBY=#hobby#, ETC=#etc#
+	where ID=#id# ans PWD=#pwd#;
+ </update>
+
+<delete id = "deleteEmp" parameterClass="emp">
+    delete from EmpTBL01 where ID = #id#
+ </delete>
+
+  
+ <select id="getEmpCount" resultClass="int">
+ 	select count(*) from EmpTBL01
+ </select> 
+ 
+ 
+  <select id="getEmpCountById" resultClass="int">
+ 	select count(*) from EmpTBL01 where ID=#id#
+ </select> 
+
+ 
+</sqlMap>

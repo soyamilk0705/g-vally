@@ -1,0 +1,145 @@
+<!-- <!DOCTYPE html> -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Java Script 예제</title>
+</head>
+<body bgcolor=white>
+	
+	<!-- <script type="text/javascript" src='hello.js'>
+	</script> 
+	
+	alert 자바 스크립트 입니다.<br><br>
+	<script>
+ 		alert("alert 은 경고 메시지용으로 사용됩니다.");
+	</script> 
+	
+	confirm 자바 스크립트입니다.<br><br>
+	<script>
+		if(confirm("확실합니까?")) {
+			document.write("OK 눌렀군요");
+		} else{
+			document.write("CANCEL 눌렀군요");
+		}
+	</script> 
+	
+	<script>
+		alertReturn = alert("alert 창입니다.");
+		document.write(alertReturn);
+		if(confirm("확인하셨나요?")) {
+			alert("확인을 선택하셨습니다.");
+		} else {
+			alert("최소를 선택하셨습니다.");
+		}
+	</script>  -->
+	
+	<!-- <script>
+		function sayHello(){
+			document.write("sayHello 함수를 호출했습니다");
+		}
+	</script>
+	
+	안녕하세요?<br>
+	자바 스크립트 함수입니다.<br>
+	
+	<script>
+		sayHello();
+	</script>
+	
+	<script>
+		msg = "반갑습니다.";
+		name = prompt("이름이 ?");
+		alert("안녕하세요, " + name + "님");
+	</script>
+	
+	<h2>&{name};님 &{msg};</h2>
+	
+	<script>
+		var bar = 50;
+		var size = 5;
+		function converSize(){
+			size = 1;
+		}
+		alert("size1 = " + size);
+		converSize();
+		alert("size2 = " + size);
+	</script>
+	
+	hello
+	<hr width="&{bar};%" align="left">
+	<font size="&{size};">world</font> -->
+	
+	<script>
+		function order(str){
+			if (str == "이해") {
+				alert("머리가 좋으시네요");
+			} else if (str == "글쎄요") {
+				alert("다시 한번 생각해보세요.");
+			} else if (str == "아니오") {
+				alert("정말 모르시나요? 거짓말이죠?");
+			}
+		}
+	</script>
+	
+	<h1>이 스크립트를 이해할 수 있죠?</h1>
+	<form>
+		<input type="button" value="예" onClick="order('이해')">
+		<input type="button" value="글쎄" onClick="order('글쎄요')">
+		<input type="button" value="아니오" onClick="order('아니오')">
+	</form>
+	
+	<script>
+		function Print(object) {
+			for (var i in object){	// object 안에 cpu, ram, hdd 가져옴(index 아님)
+				document.write(i + "=" + object[i] + "<br>");
+			}
+		}
+		
+		function computer(cpu, ram, hdd){
+			this.cpu = cpu;		// this 가 쓰인걸 보고 생성자임을 유추할 수 있음
+			this.ram = ram;
+			this.hdd = hdd;
+		}
+	</script>
+	
+	<script>
+		myComputer = new computer("pentium", 16, 810);
+		Print(myComputer);		// 멤버함수가 아니라 일반 함수여서 이렇게 사용가능, 멤버 함수는 myComputer.Print()이렇게 씀
+		document.write(myComputer + "<br>");
+		document.write(myComputer[0] + "<br>");
+		document.write(myComputer['cpu'] + "<br>");
+		document.write(myComputer[cpu] + "<br>");		// cpu가 객체가 아니니까 안나옴
+		
+	</script>
+	<br>
+	<script>
+		var a, x, y;
+		var r = 10;
+		
+		with(Math){
+			a = PI * r * r;
+			x = r * cos(PI);
+			y = r * sin(PI/2);
+		}
+		
+		document.write("a = " + a + "<br>");
+		document.write("x = " + x + "<br>");
+		document.write("y = " + y + "<br>");
+		
+	</script>
+	
+	<script>
+		function list (type) {
+			for(i=0;i<list.arguments.length;i++){
+				document.write(list.arguments[i] + "<br>");
+			}
+		}
+	</script>
+	
+	<script>
+		document.write("<h3>함수 list의 아규먼트</h3>");
+		list("o", "one", 1998, "three", 4);
+	</script>
+	
+</body>
+</html>

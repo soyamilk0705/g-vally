@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function go(){
+		alert("안녕히가세요");
+	}
+</script>
+</head>
+<body onunload="go();">
+	
+	window 객체의 location 특성을 테스트 중입니다. <br>
+	
+	<script>
+		// location = "https://www.naver.com";
+		cookie = document.cookie;
+		document.write("cookie = " + cookie + "<br>");
+		
+		for(var c in cookie) {
+			document.write(cookie[c]);
+		}
+		
+		// onsubmit : 폼의 값을 전송하기 전에 어떤 작업을 하게 할 수 있습니다
+		function goHello(){
+			/* if (document.forms[0].name.value == "value")	{
+				return false;
+			} else {
+				return true;
+			}
+			 */
+			
+			
+			 
+			 // return result = (document.forms[0].name.value == "value") ? false : true;
+			
+			 return document.form[0].name.value == "value" && true;
+			
+		}
+		
+		// onfocus : HTML 요소가 포커싱 되었을 때
+		function getFocus(){
+			console.log("onfocus");
+			alert("onfocus");
+			// document.write("onfocus가 실행되었습니다.");
+			
+			document.form1.submit1.focus = true;
+		}
+		
+		// onblur : HTML 요소가 포커싱 해지되었을 때
+		function getBlur(){
+			console.log("onblur");
+			alert("onblur");
+			// document.write("onblur가 실행되었습니다.");
+		}
+		
+		function isNumeric1(){
+			if (true)	
+				alert("숫자가 아닙니다.");
+		}
+		
+		// onchange : 포커스를 벗어났을 때 발생하는 이벤트
+		function isNumeric2(data){
+			// 숫자 판별
+			var i = parseInt(data);
+			if(isNaN(i)) {		
+				alert("onchange :: 숫자가 아닙니다. " + i);
+			} else {
+				alert("onchange :: 숫자입니다. " + i)
+			}
+		}
+		
+		function clickButton(){
+			alert("click :: 마우스 클릭했습니다.");
+		}
+		
+		function selectText(){
+			alert("selectText");
+		}
+		
+	</script>
+	
+	<h3>hello 로 가기</h3>
+	<form name="form1" action="hello.html"  onsubmit="return goHello();">
+		<!-- <input name="name" value="value" onblur="getBlur()"> : text에서 blur는 좋지 않은 결과가 나옴(chrome , firefox) -->
+		<!-- <input  type="name" onfocus="getFocus()"> : onfocus는 대부분  -->
+		<input name="name" value="value" onselect="selectText()" onchange="isNumeric2(this.value)"> 
+		<!-- mouse button click 시 순서: 1. down 2. up/click -->
+		<input type="button" id="button" value="button" onMouseDown="alert('mouse down')" onMouseUp="alert('mouse up')" onclick="clickButton();" />
+		<input type="submit" name="submit1" value="hello로 가기">
+	</form>
+	
+</body>
+</html>
