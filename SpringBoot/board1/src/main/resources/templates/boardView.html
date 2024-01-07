@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="<http://www.thymeleaf.org>">
+<head>
+	<title>board</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+</head>
+<body>
+	<div class="container">
+		<h2>게시글</h2>
+		<form name="form" action="">
+		<table border="1" class="board">
+			<tbody>
+				<tr>
+					<td scope="col">글번호</td>
+					<td th:text="${board.boardIdx}"></td>
+				</tr>
+				<tr>
+					<td scope="col">제목</td>
+					<td th:text="${board.title}"></td>
+				</tr>
+				<tr>
+					<td scope="col">조회수</td>
+					<td th:text="${board.hitCnt}"></td>
+				</tr>
+				<tr>
+					<td scope="col">작성일</td>
+					<td th:text="${board.createdDatetime}"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="hidden" name="boardIdx"  th:value="${board.boardIdx}">
+						<input type="submit" value="삭제">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	<a href="/board/openBoardWrite.do">글쓰기</a>
+	</div>
+</body>
+</html>
